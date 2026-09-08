@@ -2,7 +2,7 @@
 # this file and appends the nav:
 #     python -m fsa_docs && mkdocs build -f mkdocs.gen.yml --strict
 
-site_name: FSA Java Web Training
+site_name: FSA Java Web Training (JS/KS)
 site_description: Teaching material for the HN_FR_JSKS_JAVA_WEB programme
 docs_dir: docs
 site_dir: site
@@ -44,7 +44,13 @@ markdown_extensions:
   - tables
   - footnotes
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        # Renders ```mermaid blocks as diagrams. Material ships the mermaid
+        # bundle itself, so no CDN script is needed.
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -97,3 +103,37 @@ nav:
       - "Lab 04 — Provoke the failure modes, then work the loop": fnd/lab-04.md
     - Assignments:
     - Templates:
+  - DBF:
+    - dbf/index.md
+    - Notes:
+      - "Relational Modelling & Normalization": dbf/relational-modelling.md
+      - "DDL, Constraints & Data Integrity": dbf/ddl-and-constraints.md
+      - "SQL Querying, Plans & Transactions": dbf/querying-plans-and-transactions.md
+      - "Database Foundations — Appendix": dbf/appendix.md
+    - Labs:
+      - "Lab 01 — Model the OrderDesk returns domain": dbf/lab-01.md
+      - "Lab 02 — Implement the model as runnable DDL": dbf/lab-02.md
+      - "Lab 03 — Query, index and transact": dbf/lab-03.md
+  - JCF:
+    - jcf/index.md
+    - Notes:
+      - "Development Environment & the Java Toolchain": jcf/toolchain-and-build.md
+      - "Java Syntax, Types & Methods": jcf/language-fundamentals.md
+      - "Object-Oriented Design & Modern Java Types": jcf/objects-and-modern-types.md
+      - "Interfaces, Polymorphism & Composition": jcf/interfaces-and-polymorphism.md
+      - "Exceptions & Unit Testing": jcf/exceptions-and-testing.md
+      - "Collections, Generics, Lambdas & Streams": jcf/collections-and-streams.md
+      - "JDBC & the Repository Pattern": jcf/jdbc-and-repositories.md
+      - "JPA & Hibernate Mapping": jcf/jpa-and-hibernate.md
+      - "Persistence Performance": jcf/persistence-performance.md
+      - "Java Core, JDBC & JPA/Hibernate — Appendix": jcf/appendix.md
+    - Labs:
+      - "Lab 01 — Configure the toolchain and build a project": jcf/lab-01.md
+      - "Lab 02 — A command-line utility from a specification": jcf/lab-02.md
+      - "Lab 03 — Model the OrderDesk domain": jcf/lab-03.md
+      - "Lab 04 — Interchangeable strategies behind one interface": jcf/lab-04.md
+      - "Lab 05 — Exception boundaries and a test suite": jcf/lab-05.md
+      - "Lab 06 — Lookup, grouping, sorting and reporting": jcf/lab-06.md
+      - "Lab 07 — A JDBC repository with integration tests": jcf/lab-07.md
+      - "Lab 08 — The same repository with JPA": jcf/lab-08.md
+      - "Lab 09 — Diagnose and fix an N+1": jcf/lab-09.md
