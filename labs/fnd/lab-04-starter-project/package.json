@@ -1,0 +1,12 @@
+{
+  "name": "orderdesk-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OrderDesk starter project for Foundations Lab 04",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -22,8 +22,10 @@ By the end of this lab you will be able to:
 - You have read [AI-Assisted Development](ai-assisted-development.md).
 - The approved AI assistant is installed, signed in, and your licence works. Check this
   now, not at step 3.
-- The trainer has given you the **OrderDesk starter project**: a small runnable project
-  with a cancellation function, a returns file, and a test you can run in one command.
+- You have the **OrderDesk starter project**: a small runnable project with a cancellation
+  function, a returns file, and tests you run with one command. Copy it out of
+  [`labs/fnd/lab-04-starter-project`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-04-starter-project). It needs Node 20 or
+  later and installs nothing.
 - You have run the test command once and seen it pass. If it does not pass yet, fix that
   before continuing.
 - A scratch file open for your notes — you write to it throughout.

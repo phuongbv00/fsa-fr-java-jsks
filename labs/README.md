@@ -1,0 +1,31 @@
+# Lab materials
+
+Starter material for the labs that need something supplied. Most labs scaffold their own
+project — with Vite or a Maven archetype — and are not listed here.
+
+| Lab | Folder | What it gives you |
+|---|---|---|
+| FND Lab 01 | [`fnd/lab-01-stakeholder-brief`](fnd/lab-01-stakeholder-brief) | One page of raw meeting notes about returns and refunds, deliberately vague and partly contradictory |
+| FND Lab 02 | [`fnd/lab-02-orderdesk-seed`](fnd/lab-02-orderdesk-seed) | A small folder of text and source files with no `.git`, to make a repository from |
+| FND Lab 03 | [`fnd/lab-03-shared-repo`](fnd/lab-03-shared-repo) | The contents a shared repository starts from, plus two stories that collide on purpose |
+| FND Lab 04 | [`fnd/lab-04-starter-project`](fnd/lab-04-starter-project) | A runnable project with passing tests, for the AI-assisted development lab |
+
+## Getting them
+
+Clone the whole repository, or download a single folder from the GitHub page.
+
+```bash
+git clone https://github.com/phuongbv00/fsa-fr-java-jsks.git
+cd fsa-fr-java-jsks/labs/fnd/lab-04-starter-project
+```
+
+For Lab 02 and Lab 04 you want the folder **copied out** to somewhere of your own, so the work
+you do is yours and not a change to this repository.
+
+```bash
+cp -r fsa-fr-java-jsks/labs/fnd/lab-02-orderdesk-seed ~/orderdesk
+cd ~/orderdesk
+```
+
+Lab 02 in particular expects **no `.git` directory** — you create the repository yourself in
+step 1. Copying the folder out gives you exactly that.

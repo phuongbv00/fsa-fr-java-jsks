@@ -20,8 +20,9 @@ By the end of this lab you will be able to:
 - You have read [Agile & Scrum](agile-and-scrum.md).
 - You know the OrderDesk domain from section 2 of
   [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
-- The trainer has given you the **stakeholder brief** — one page of raw notes from a
-  meeting about returns and refunds, deliberately vague and partly contradictory.
+- You have the **stakeholder brief** — one page of raw notes from a meeting about returns
+  and refunds, deliberately vague and partly contradictory. Get it from
+  [`labs/fnd/lab-01-stakeholder-brief`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-01-stakeholder-brief).
 - Somewhere to write the backlog that everyone can see: a board, a shared document or a
   wall of sticky notes.
 

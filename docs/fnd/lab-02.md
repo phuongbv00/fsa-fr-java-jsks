@@ -22,8 +22,10 @@ By the end of this lab you will be able to:
 - `user.name` and `user.email` set globally — see section 5 of
   [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 - You have read [Git Fundamentals](git-fundamentals.md).
-- The trainer has given you the **OrderDesk seed folder**: a small set of plain text and
-  source files with no `.git` directory. You will make it a repository yourself.
+- You have the **OrderDesk seed folder**: a small set of plain text and source files with
+  no `.git` directory — you make it a repository yourself in step 1. Copy it out of
+  [`labs/fnd/lab-02-orderdesk-seed`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-02-orderdesk-seed) to a folder of your own,
+  so the history you create is yours.
 - A terminal, and an editor you can open the folder in.
 
 Nothing here touches a remote. You work entirely locally until session 3.

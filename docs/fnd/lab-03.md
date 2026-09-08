@@ -18,10 +18,14 @@ By the end of this lab you will be able to:
 ## Before you start
 
 - You have read [Pull Requests & Collaborative Workflow](pull-requests-and-conflicts.md).
-- The trainer has given both of you access to the **shared OrderDesk repository** on the
-  class hosting platform, with `main` protected so direct pushes are refused.
-- The trainer has told you which **two stories** you and your pair partner will implement.
-  They deliberately touch the same file, so a conflict is guaranteed.
+- Your trainer has given both of you access to the **shared OrderDesk repository** on the
+  class hosting platform, with `main` protected so direct pushes are refused. It starts from
+  [`labs/fnd/lab-03-shared-repo/seed`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-03-shared-repo/seed).
+- You know which of the **two stories** is yours —
+  [Story A](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-03-shared-repo/stories/story-a.md) or
+  [Story B](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-03-shared-repo/stories/story-b.md). They change the same function on
+  purpose, so whoever merges second gets a conflict. Do not read your partner's story until
+  your own pull request is open.
 - You have cloned the repository and `git remote -v` shows `origin`.
 
 ## Steps
