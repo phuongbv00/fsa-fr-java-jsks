@@ -1,6 +1,6 @@
 # Service Layer, Transactions & Locking
 
-> Session 4 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 4 · Spring Boot 4.1 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -221,15 +221,27 @@ public class Stock {
 The `UPDATE` becomes `... WHERE id = ? AND version = ?`. If it affects no rows, Spring throws
 `OptimisticLockingFailureException`.
 
+The retry has to live **outside** the transaction, in a separate bean: a failed attempt has
+marked its transaction rollback-only, so retrying inside it cannot succeed — and calling
+`reserve` from the same class would be the self-invocation from section 3.
+
 ```java
-@Transactional
-public void reserveWithRetry(long orderId) {
-    for (int attempt = 1; attempt <= 3; attempt++) {
-        try {
-            reserve(orderId);
-            return;
-        } catch (OptimisticLockingFailureException e) {
-            if (attempt == 3) throw e;      // give up, and say so
+@Component
+public class ReservationRetrier {
+
+    private final OrderService orders;      // the proxy, so @Transactional applies
+
+    public ReservationRetrier(OrderService orders) { this.orders = orders; }
+
+    // Deliberately NOT @Transactional: each attempt is its own transaction.
+    public void reserveWithRetry(long orderId) {
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            try {
+                orders.reserve(orderId);
+                return;
+            } catch (OptimisticLockingFailureException e) {
+                if (attempt == 3) throw e;      // give up, and say so
+            }
         }
     }
 }

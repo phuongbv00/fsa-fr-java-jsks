@@ -42,8 +42,10 @@ By the end of this lab you will be able to:
 8. **Measure the N+1.** Enable `hibernate.generate_statistics`. Write a test calling the history
    endpoint's service method and printing the query count. Record the number.
 
-9. **Fix it** with a fetch join and an explicit `countQuery`. Re-measure, and change the test to
-   assert the count so a regression fails the build.
+9. **Try the Java Core fix first** — `LEFT JOIN FETCH o.lines` with the `Pageable` — and record
+   the `HHH90003004` warning and what the query count *does not* tell you. Then fix it with
+   `@BatchSize` on the collection. Re-measure, and change the test to assert the count so a
+   regression fails the build.
 
 10. **Compare with a projection.** Measure the projection version's query count too, and say in
     `docs/queries.md` when you would choose each.
@@ -57,7 +59,8 @@ By the end of this lab you will be able to:
 - [ ] A record projection returns a computed total in one query.
 - [ ] Two endpoints return `Page` with a unique tie-break.
 - [ ] Before and after query counts are recorded for at least 200 orders.
-- [ ] The fetch-joined `Page` has an explicit `countQuery`.
+- [ ] `docs/queries.md` records the `HHH90003004` in-memory pagination warning and why a fetch
+      join is the wrong fix for a paged query.
 - [ ] A test asserts the query count and would fail on regression.
 
 ---

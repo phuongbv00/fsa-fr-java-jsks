@@ -1,6 +1,6 @@
 # Development Environment & the Java Toolchain
 
-> Session 1 · JDK 21, Maven 3.9 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 1 · JDK 17, Maven 3.9 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -54,12 +54,12 @@ mvn -version | grep -i "java version"
 
 ```text
 Wrong — the shell and Maven disagree
-$ java -version   →  21.0.2
-$ mvn -version    →  Java version: 17.0.9
+$ java -version   →  17.0.12
+$ mvn -version    →  Java version: 11.0.24
 
 Right — one JDK, everywhere
-$ java -version   →  21.0.2
-$ mvn -version    →  Java version: 21.0.2
+$ java -version   →  17.0.12
+$ mvn -version    →  Java version: 17.0.12
 ```
 
 Set it permanently rather than per-shell:
@@ -71,7 +71,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 ```
 
 > **Note.** On macOS, `/usr/libexec/java_home -V` lists every installed JDK, and
-> `export JAVA_HOME=$(/usr/libexec/java_home -v 21)` selects one by version.
+> `export JAVA_HOME=$(/usr/libexec/java_home -v 17)` selects one by version.
 
 ## 4. Maven Project Layout
 
@@ -107,7 +107,7 @@ miss — `mvn package` has already compiled and tested.
 | `validate` | Checks the project is well-formed | — |
 | `compile` | Compiles `src/main/java` | `target/classes/` |
 | `test` | Compiles and runs `src/test/java` | `target/surefire-reports/` |
-| `package` | Assembles the artifact | `target/orderdesk-1.0.jar` |
+| `package` | Assembles the artifact | `target/orderdesk-1.0-SNAPSHOT.jar` |
 | `verify` | Runs integration tests and checks | — |
 | `install` | Copies the artifact to `~/.m2/repository` | — |
 
@@ -137,7 +137,7 @@ mvn dependency:tree               # what is actually on the classpath, and why
 
   <properties>
     <!-- One place that decides the language level. Set it; do not rely on a default. -->
-    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -145,14 +145,14 @@ mvn dependency:tree               # what is actually on the classpath, and why
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.7.3</version>
+      <version>42.7.8</version>
       <!-- runtime: needed to run, not to compile. The driver is loaded by name. -->
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.10.2</version>
+      <version>5.13.4</version>
       <!-- test: on the test classpath only, never packaged. -->
       <scope>test</scope>
     </dependency>
@@ -163,7 +163,7 @@ mvn dependency:tree               # what is actually on the classpath, and why
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.5.3</version>
       </plugin>
     </plugins>
   </build>
@@ -183,13 +183,13 @@ Scope is the part worth learning properly:
 <!-- Wrong — JUnit ships to production, and production code can import assertions -->
 <dependency>
   <groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId>
-  <version>5.10.2</version>
+  <version>5.13.4</version>
 </dependency>
 
 <!-- Right -->
 <dependency>
   <groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId>
-  <version>5.10.2</version><scope>test</scope>
+  <version>5.13.4</version><scope>test</scope>
 </dependency>
 ```
 
@@ -274,8 +274,9 @@ The jar has no `Main-Class`. Configure `maven-jar-plugin` as above.
 
 ### `class file has wrong version 65.0, should be 61.0`
 
-Compiled with a newer JDK than the one running it. Java 21 is class file 65, Java 17 is 61.
-Align `java`, `javac` and `maven.compiler.release`.
+Compiled with a newer JDK than the one running it — here a JDK 17 compiled it and a JDK 17
+is running it. Java 17 is class file 61, Java 17 is 65. Align `java`, `javac` and
+`maven.compiler.release`; this programme pins all three at 17.
 
 ### `package org.junit.jupiter.api does not exist`
 
@@ -302,7 +303,7 @@ broken. Re-import the project from the `pom.xml`.
 
 ## 10. Knowledge Check
 
-1. `java -version` says 21 and `mvn -version` says 17. What is wrong, and how do you fix it?
+1. `java -version` says 17 and `mvn -version` says 11. What is wrong, and how do you fix it?
 2. What does `mvn package` do that `mvn compile` does not? Name every phase in between.
 3. Why is the PostgreSQL driver `runtime` scope and JUnit `test` scope?
 4. A class declares `package com.fsa.orderdesk.domain;`. Where must the file live, and what
@@ -313,7 +314,7 @@ broken. Re-import the project from the `pom.xml`.
 
 - [Maven: Introduction to the Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 - [Maven: Dependency Scopes](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
-- [JDK 21 documentation](https://docs.oracle.com/en/java/javase/21/)
+- [JDK 17 documentation](https://docs.oracle.com/en/java/javase/17/)
 
 ---
 

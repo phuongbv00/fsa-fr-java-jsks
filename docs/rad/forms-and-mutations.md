@@ -1,6 +1,6 @@
 # Forms, Validation & Mutations
 
-> Session 4 · React 18 · See [React Application Development — Study Guide](index.md).
+> Session 4 · React 19 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 

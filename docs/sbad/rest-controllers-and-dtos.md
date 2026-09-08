@@ -1,6 +1,6 @@
 # REST Controllers, DTOs & HTTP Semantics
 
-> Session 2 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 2 · Spring Boot 4.1 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 

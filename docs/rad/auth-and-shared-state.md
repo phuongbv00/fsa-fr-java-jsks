@@ -1,6 +1,6 @@
 # Authentication, Authorization & Shared State
 
-> Session 5 · React 18, React Router 6 · See [React Application Development — Study Guide](index.md).
+> Session 5 · React 19, React Router 7 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 

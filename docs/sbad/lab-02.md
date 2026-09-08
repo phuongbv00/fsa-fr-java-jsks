@@ -42,8 +42,10 @@ By the end of this lab you will be able to:
    descending, and includes a unique tie-break.
 
 8. **Prove the tie-break matters.** Seed 30 orders sharing one `placedAt`. Page through them
-   without the tie-break, record a row appearing twice or not at all, then add the tie-break and
-   show every row appearing exactly once.
+   without the tie-break and compare the pages with what `EXPLAIN` says about the sort — the
+   order of ties is whatever the plan happened to produce, and it *may* change between queries
+   (update a row in between and try again). Record what you saw, then add the tie-break and show
+   every row appearing exactly once, provably.
 
 9. **Prove no entity escapes.** Write a test asserting the JSON of an order contains no field
    that exists only on the entity, and that fetching an order with lines does not throw

@@ -54,10 +54,10 @@ The long assignment is issued in session 1 and completed in unit 7.
 ```bash
 node --version     # expect 20.x or 22.x LTS
 
-npm create vite@latest orderdesk-web -- --template react-ts
+npm create vite@latest orderdesk-web -- --template react-ts    # React 19, Vite 7
 cd orderdesk-web && npm install
-npm install react-router-dom
-npm install -D vitest @testing-library/react @testing-library/user-event jsdom
+npm install react-router-dom@7
+npm install -D vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom msw
 npm run dev        # http://localhost:5173
 ```
 

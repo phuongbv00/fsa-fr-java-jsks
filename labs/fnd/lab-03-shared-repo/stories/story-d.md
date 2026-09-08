@@ -11,8 +11,7 @@
 - Opening a return against an order whose status is `cancelled` is refused, and the refusal
   says the order was cancelled.
 - Opening a return against any other status behaves as it does today.
-- The check happens before any line validation, so a cancelled order is refused even when the
-  line list is also wrong.
+- A cancelled order is refused even when the lines being returned are otherwise valid.
 - The refusal is a thrown error, consistent with how `openReturn` already rejects an empty
   line list.
 

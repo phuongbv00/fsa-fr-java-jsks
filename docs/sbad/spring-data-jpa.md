@@ -1,6 +1,6 @@
 # Spring Data JPA
 
-> Session 3 · Spring Boot 3.3, Hibernate 6.4 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 3 · Spring Boot 4.1, Hibernate 7 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -213,43 +213,47 @@ statement of intent.
 ## 7. Worked Example — And an N+1 to Avoid
 
 ```java
-public interface OrderRepository extends JpaRepository<Order, Long> {
-
-    Page<Order> findByCustomerId(long customerId, Pageable pageable);
-
-    // Same query, with the lines fetched. Note the separate countQuery: a
-    // fetch-joined count is invalid, and Spring cannot derive one.
-    @Query(value = """
-            SELECT DISTINCT o FROM Order o
-            LEFT JOIN FETCH o.lines
-            WHERE  o.customerId = :customerId
-            """,
-           countQuery = "SELECT COUNT(o) FROM Order o WHERE o.customerId = :customerId")
-    Page<Order> findByCustomerIdWithLines(@Param("customerId") long customerId, Pageable pageable);
+@Transactional(readOnly = true)
+public Page<OrderResponse> history(long customerId, Pageable pageable) {
+    // OrderResponse.from touches order.lines() — for every order on the page.
+    return repository.findByCustomerId(customerId, pageable).map(OrderResponse::from);
 }
 ```
 
+With a page of 20 that is 1 query for the page, 1 for the count and **20 more** for the lines —
+the N+1 from Java Core unit 9, one derived method away.
+
+The Java Core fix — `LEFT JOIN FETCH o.lines` — does **not** combine with `Pageable`. A fetch
+join on a collection multiplies rows, so `LIMIT 20` would cut an order's lines in half; Hibernate
+refuses to do that and instead loads *every* row and paginates in memory, logging
+`HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory`. The
+query count looks right and the whole table has just been read.
+
+For a paged screen, ask Hibernate to load the collections in batches instead:
+
 ```java
-@Transactional(readOnly = true)
-public Page<OrderResponse> history(long customerId, Pageable pageable) {
-    // Uses the fetch-joined query: OrderResponse.from touches order.lines().
-    return repository.findByCustomerIdWithLines(customerId, pageable)
-                     .map(OrderResponse::from);
+@Entity
+@Table(name = "orders")
+public class Order {
+    ...
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 25)          // one IN (...) query per 25 orders, not one per order
+    private List<OrderLine> lines = new ArrayList<>();
 }
 ```
 
 ```java
 @Test
-void historyIssuesOneQueryPerPage() {
+void historyIssuesThreeQueriesPerPage() {
     statistics.clear();
     service.history(42, PageRequest.of(0, 20));
-    // 1 for the page, 1 for the count. Not 22.
-    assertEquals(2, statistics.getPrepareStatementCount());
+    // 1 for the page, 1 for the count, 1 batch for all 20 orders' lines. Not 22.
+    assertEquals(3, statistics.getPrepareStatementCount());
 }
 ```
 
-The mapping is the trap. `findByCustomerId` looks identical at the call site and produces 21
-queries because `OrderResponse.from` touches the lazy collection.
+When the screen does not need entities at all, the projection from section 5 is one query and
+no persistence context — usually the better answer for a list.
 
 ## 8. Common Problems
 
@@ -267,9 +271,14 @@ A `@Modifying` query without a transaction. Add `@Transactional`, on the service
 The query bypassed the persistence context. Reload, or add
 `@Modifying(clearAutomatically = true)`.
 
-### `Page` returns the wrong total with a fetch join
+### `HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory`
 
-Provide an explicit `countQuery`.
+A `Pageable` on a query that fetch-joins a collection. Hibernate loaded everything and paged in
+memory. Use `@BatchSize` or a projection; keep fetch joins for un-paged queries.
+
+### `Page` returns the wrong total with a `@Query`
+
+Spring could not derive a count query. Provide an explicit `countQuery`.
 
 ### `LazyInitializationException` in the controller
 
@@ -288,15 +297,17 @@ A derived query plus a mapper that touches an association. Use a fetch join, or 
 - Return `Page` from list endpoints, with a unique tie-break in the sort.
 - Map to DTOs in a `@Transactional(readOnly = true)` service method.
 - Assert query counts in a test for any endpoint that maps an association.
+- Never combine `JOIN FETCH` on a collection with `Pageable`; batch-fetch or project instead.
 
 ## 10. Knowledge Check
 
 1. Where is the implementation of `OrderRepository`, and when is it created?
 2. `findByCustomerIdAndStatusNotAndPlacedAtBetween` — what is wrong with it, and what replaces it?
 3. Why does a `@Modifying` query leave loaded entities stale?
-4. Why does a fetch-joined `Page` need an explicit `countQuery`?
-5. Two service methods differ only in the repository method they call; one issues 2 queries and
-   the other 22. Explain.
+4. What does Hibernate do when a fetch-joined collection query is paged, and why is that worse
+   than the N+1 it was meant to fix?
+5. Two service methods differ only in one annotation on the entity; one issues 3 queries per
+   page and the other 22. Explain.
 
 ## 11. Further Reading
 

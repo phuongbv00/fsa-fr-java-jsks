@@ -1,6 +1,6 @@
 # Authentication with Spring Security & JWT
 
-> Session 6 · Spring Boot 3.3, Spring Security 6.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 6 · Spring Boot 4.1, Spring Security 7.1, JJWT 0.13 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -50,6 +50,11 @@ public class AppUser {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
+    // Null for staff. For a customer, the customer row this login belongs to — the
+    // ownership checks in unit 7 compare against it.
+    @Column(name = "customer_id")
+    private Long customerId;
+
     @ElementCollection(fetch = FetchType.EAGER)      // small, always needed
     @CollectionTable(name = "app_user_role")
     @Column(name = "role")
@@ -73,6 +78,28 @@ public PasswordEncoder passwordEncoder() {
 BCrypt embeds its own random salt, so two users with the same password get different hashes.
 That is why you never store a salt column and never compare hashes for equality — use `matches`.
 
+Spring's own `User` class would do for username, hash and authorities, but the controllers in
+unit 7 need to know *which customer* is calling. Carry that on your own `UserDetails`:
+
+```java
+public record AppUserDetails(long userId, Long customerId, String email,
+                             String passwordHash, Set<String> roles) implements UserDetails {
+
+    public static AppUserDetails from(AppUser user) {
+        return new AppUserDetails(user.getId(), user.getCustomerId(), user.getEmail(),
+                                  user.getPasswordHash(), Set.copyOf(user.getRoles()));
+    }
+
+    public boolean isStaff() { return roles.contains("ROLE_STAFF") || roles.contains("ROLE_ADMIN"); }
+
+    @Override public String getUsername() { return email; }
+    @Override public String getPassword() { return passwordHash; }
+    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream().map(SimpleGrantedAuthority::new).toList();
+    }
+}
+```
+
 ```java
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -83,15 +110,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        AppUser user = users.findByEmail(email)
+        return users.findByEmail(email)
+                .map(AppUserDetails::from)
                 // Deliberately vague: a distinct "no such user" message tells an
                 // attacker which addresses are registered.
                 .orElseThrow(() -> new UsernameNotFoundException("bad credentials"));
-
-        return User.withUsername(user.getEmail())
-                   .password(user.getPasswordHash())
-                   .authorities(user.getRoles().stream().map(SimpleGrantedAuthority::new).toList())
-                   .build();
     }
 }
 ```
@@ -100,6 +123,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 A JWT has three base64url parts: header, claims, signature. It is **signed, not encrypted** —
 anyone holding it can read the claims.
+
+The library is JJWT 0.13 — three artifacts, all the same version:
+
+```xml
+<dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-api</artifactId><version>0.13.0</version></dependency>
+<dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-impl</artifactId><version>0.13.0</version><scope>runtime</scope></dependency>
+<dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-jackson</artifactId><version>0.13.0</version><scope>runtime</scope></dependency>
+```
+
+The API below is the 0.12+ one (`Jwts.parser().verifyWith(...)`). Tutorials written for 0.11
+look similar and do not compile; check the version before copying.
 
 ```text
 eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWlAZXhhbXBsZS5jb20iLCJleHAiOjE3ODg4Mzg4MDB9.4f...
@@ -167,8 +201,9 @@ Three mistakes, each of which has caused real breaches:
 // Wrong — a secret in source, therefore in Git history forever.
 Keys.hmacShaKeyFor("my-secret-key".getBytes());
 
-// Wrong — trusting the token's own algorithm claim allows alg=none forgery.
-Jwts.parser().build().parseSignedClaims(token);
+// Wrong — accepting unsigned tokens. An attacker sets alg=none, drops the signature,
+// and writes any claims they like.
+Jwts.parser().unsecured().verifyWith(key).build().parse(token);
 ```
 
 > **Note.** Never put anything secret in the claims. They are base64, not encryption — paste a
@@ -226,14 +261,26 @@ public class SecurityConfiguration {
         return http
             // No cookies, no sessions, so no CSRF vector. Disabling it on a
             // cookie-authenticated API would be a serious mistake.
-            .csrf(AbstractHttpConfigurer::disable)
+            .csrf(csrf -> csrf.disable())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            // Without this, an unauthenticated request gets 403: with no login page and no
+            // HTTP Basic, Spring Security has no "please authenticate" to offer, so it
+            // falls back to Forbidden. A bearer-token API must say 401 itself.
+            .exceptionHandling(e -> e.authenticationEntryPoint(
+                    new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/login").permitAll()
                 .requestMatchers("/actuator/health").permitAll()
                 .anyRequest().authenticated())          // deny by default
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
+    }
+
+    // Not auto-exposed as a bean; the login endpoint needs it.
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
+        return config.getAuthenticationManager();
     }
 }
 ```
@@ -263,15 +310,28 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(request.email(), request.password()));
             return new LoginResponse(jwt.issue((UserDetails) authentication.getPrincipal()));
         } catch (AuthenticationException e) {
-            // One message for a wrong email and a wrong password alike.
+            // One message for a wrong email and a wrong password alike; the advice from
+            // unit 5 turns this into a 401 with the standard error body.
             throw new InvalidCredentialsException();
         }
+    }
+
+    // Who am I? The front end calls this after login and on every reload, rather than
+    // trusting whatever it cached: the token is a credential, the server is the identity.
+    @GetMapping("/me")
+    public MeResponse me(@AuthenticationPrincipal AppUserDetails principal) {
+        return new MeResponse(principal.email(), principal.customerId(), principal.roles());
     }
 }
 
 public record LoginRequest(@NotBlank @Email String email, @NotBlank String password) {}
 public record LoginResponse(String accessToken) {}
+public record MeResponse(String email, Long customerId, Set<String> roles) {}
 ```
+
+`/api/auth/me` is *not* public — which is why the rules in section 6 permit `/api/auth/login`
+and not `/api/auth/**`. A wildcard there would have made this endpoint answer anonymously the
+moment it was added.
 
 ```bash
 TOKEN=$(curl -s -X POST localhost:8080/api/auth/login \
@@ -284,6 +344,11 @@ curl -i localhost:8080/api/orders -H "Authorization: Bearer nonsense"   # 401
 ```
 
 ## 8. Common Problems
+
+### 403 instead of 401 when there is no token
+
+No `authenticationEntryPoint` configured. With neither a login form nor HTTP Basic in the chain,
+Spring Security's fallback entry point answers Forbidden. Set `HttpStatusEntryPoint(UNAUTHORIZED)`.
 
 ### Every request returns 401 with a valid token
 

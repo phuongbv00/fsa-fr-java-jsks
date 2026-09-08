@@ -1,6 +1,6 @@
 # React, JSX, Components & State
 
-> Session 1 · React 18, TypeScript 5.6, Vite 5 · See [React Application Development — Study Guide](index.md).
+> Session 1 · React 19, TypeScript 5.9, Vite 7 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 

@@ -28,10 +28,12 @@ By the end of this lab you will be able to:
    successful read; a 404; a validation failure asserting exact `fieldErrors[].field` paths.
 
 4. **Write `@DataJpaTest` tests** with `@AutoConfigureTestDatabase(replace = NONE)` and a
-   PostgreSQL container initialised from your DBF `schema.sql`.
+   PostgreSQL container initialised from the supplied `schema.sql`
+   (`labs/dbf/orderdesk-schema`, copied into `src/test/resources`).
 
-5. **Show why H2 is not enough.** Run one repository test against H2 and record what differs — a
-   type, a constraint, or a function that behaves differently. Put it in `docs/testing.md`.
+5. **Show why H2 is not enough.** Add `com.h2database:h2` at `test` scope temporarily, run one
+   repository test against it and record what differs — a type, a constraint, or a function
+   that behaves differently. Put it in `docs/testing.md`, then remove the dependency.
 
 6. **Write `@SpringBootTest` integration tests** for the full flow: log in, place an order, read
    it back, cancel it as staff.

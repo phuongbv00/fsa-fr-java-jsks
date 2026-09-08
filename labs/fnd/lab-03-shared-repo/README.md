@@ -21,6 +21,15 @@ That is the whole point: the first person to merge goes in cleanly, and everyone
 gets a real conflict to resolve. Each guard is small, so the conflicts stay readable while
 still being genuine.
 
+Two things are deliberate and worth knowing before you hand the stories out:
+
+- Every story adds its guard **after** the existing empty-lines check. Git only reports a
+  conflict when the two sides touch the same or adjacent lines, so a guard inserted somewhere
+  else in the function may merge cleanly — which defeats the exercise.
+- Stories **B** and **E** contradict each other on an order with no `deliveredAt` (B allows the
+  return, E refuses it). Whoever merges second has to make a product decision, not just keep
+  one side. That is what step 11 of the lab is about.
+
 ## For the trainer — one-time setup per group
 
 1. Create an empty repository on the class hosting platform, one per group.

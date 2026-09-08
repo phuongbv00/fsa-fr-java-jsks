@@ -13,6 +13,7 @@ other and compare results.
 | FND Lab 02 | [`fnd/lab-02-orderdesk-seed`](fnd/lab-02-orderdesk-seed) | A small folder of text and source files with no `.git`, to make a repository from |
 | FND Lab 03 | [`fnd/lab-03-shared-repo`](fnd/lab-03-shared-repo) | The contents a shared repository starts from, plus five stories that collide on purpose — one per group member |
 | FND Lab 04 | [`fnd/lab-04-starter-project`](fnd/lab-04-starter-project) | A runnable project with passing tests, for the AI-assisted development lab |
+| DBF, JCF, SBAD | [`dbf/orderdesk-schema`](dbf/orderdesk-schema) | The OrderDesk order schema and seed data — the database every module from Database Foundations onward reads and writes |
 
 ## Getting them
 
@@ -33,3 +34,10 @@ cd ~/orderdesk
 
 Lab 02 in particular expects **no `.git` directory** — you create the repository yourself in
 step 1. Copying the folder out gives you exactly that.
+
+The order schema is used for the rest of the programme, so copy it out once and keep it:
+
+```bash
+cp -r fsa-fr-java-jsks/labs/dbf/orderdesk-schema ~/orderdesk-schema
+~/orderdesk-schema/rebuild.sh
+```

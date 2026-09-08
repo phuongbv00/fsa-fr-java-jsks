@@ -11,13 +11,13 @@ npm test           # or just: node --test
 ```
 
 You should see every test pass before you start the lab. If it does not pass, fix that first —
-step 6 asks you to add a check, and you cannot tell a new failure from an old one otherwise.
+step 7 asks you to write a check, and you cannot tell a new failure from an old one otherwise.
 
 ## Layout
 
 ```
 src/cancellation.js   whether an order may be cancelled, and why not
-src/returns.js        opening and approving returns — the file step 5 changes
+src/returns.js        opening and approving returns — the file steps 6 to 10 change
 src/orders.js         a few sample orders to work against
 test/                 the tests, run by `node --test`
 ```

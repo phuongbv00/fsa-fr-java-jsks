@@ -1,6 +1,6 @@
 # JPA & Hibernate Mapping
 
-> Session 8 · JDK 21, Jakarta Persistence 3.1, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 8 · JDK 17, Jakarta Persistence 3.2, Hibernate 7.1 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -58,7 +58,8 @@ public class Order {
     @Column(name = "placed_at", nullable = false)
     private Instant placedAt;
 
-    @Enumerated(EnumType.STRING)   // store the name, never the ordinal
+    // The table stores 'placed', 'picking', ... — the enum's dbValue(), not its name.
+    @Convert(converter = OrderStatusConverter.class)
     @Column(nullable = false, length = 16)
     private OrderStatus status = OrderStatus.PLACED;
 
@@ -72,7 +73,7 @@ public class Order {
         this.placedAt = placedAt;
     }
 
-    // Keep both sides of the relationship consistent in one place.
+    // Keep both sides of the relationship consistent in one place (section 4).
     public void addLine(OrderLine line) {
         lines.add(line);
         line.setOrder(this);
@@ -112,6 +113,23 @@ public class OrderLine {
 }
 ```
 
+```java
+// A converter is the bridge between the enum and the column's CHECK constraint.
+@Converter
+public class OrderStatusConverter implements AttributeConverter<OrderStatus, String> {
+
+    @Override
+    public String convertToDatabaseColumn(OrderStatus status) {
+        return status == null ? null : status.dbValue();      // 'placed'
+    }
+
+    @Override
+    public OrderStatus convertToEntityAttribute(String dbValue) {
+        return dbValue == null ? null : OrderStatus.fromDb(dbValue);   // throws on unknown
+    }
+}
+```
+
 Two mappings worth arguing about:
 
 ```java
@@ -120,10 +138,18 @@ Two mappings worth arguing about:
 @Enumerated(EnumType.ORDINAL)
 private OrderStatus status;
 
-// Right
+// Wrong here — stores the constant's NAME, 'PLACED'. The column's CHECK constraint
+// only accepts 'placed', so every insert fails — and validate does not check CHECKs.
 @Enumerated(EnumType.STRING)
 private OrderStatus status;
+
+// Right — the converter writes dbValue() and reads back through fromDb()
+@Convert(converter = OrderStatusConverter.class)
+private OrderStatus status;
 ```
+
+`EnumType.STRING` is the right default when the column holds the constant names. It is wrong
+whenever the database has its own vocabulary — and the Database Foundations schema does.
 
 ```java
 // Wrong — EAGER loads the lines on every single order query, forever
@@ -149,19 +175,27 @@ flowchart LR
 Only changes to the owning side are written. This is the single most common JPA bug:
 
 ```java
-// Wrong — the inverse side is updated, so no order_id is written and the line is orphaned
-order.lines().add(line);
+// Wrong — a helper that only touches the inverse collection. The line is persisted by
+// the cascade, but line.order is null, so the INSERT has no order_id and fails on the
+// NOT NULL constraint — or, with a nullable column, writes an orphan.
+public void addLine(OrderLine line) {
+    lines.add(line);
+}
 
-// Right — set the owning side, or use a helper that sets both
-line.setOrder(order);
-
-// Best — one method keeps them consistent
-order.addLine(line);
+// Right — set the owning side too, in the same method, so nobody can forget
+public void addLine(OrderLine line) {
+    lines.add(line);
+    line.setOrder(this);
+}
 ```
 
+(`order.lines()` returns an unmodifiable copy, so the collection cannot be edited from outside
+at all — the helper is the only way in, which is the point.)
+
 `cascade = CascadeType.ALL` propagates operations from the order to its lines, so persisting an
-order persists its lines. `orphanRemoval = true` deletes a line removed from the collection —
-the JPA equivalent of the `ON DELETE CASCADE` you wrote in Database Foundations.
+order persists its lines and removing it removes them — the application-side counterpart of the
+`ON DELETE CASCADE` you wrote in Database Foundations. `orphanRemoval = true` goes one step
+further: a line merely *removed from the collection* is deleted too.
 
 ## 5. The Persistence Context
 
@@ -265,12 +299,13 @@ Optional<Order> o = em.createQuery(jpql, Order.class)
 
 ```xml
 <!-- src/main/resources/META-INF/persistence.xml -->
-<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.1">
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.2">
   <persistence-unit name="orderdesk" transaction-type="RESOURCE_LOCAL">
     <properties>
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:postgresql://localhost:5432/orderdesk"/>
       <property name="jakarta.persistence.jdbc.user" value="orderdesk"/>
+      <!-- No password here: it is supplied at runtime, below. -->
 
       <!-- validate: the schema is owned by your DBF scripts, not by Hibernate.
            Never "update" — it changes production schemas silently. -->
@@ -284,9 +319,19 @@ Optional<Order> o = em.createQuery(jpql, Order.class)
 </persistence>
 ```
 
+The password is not in the file, for the same reason it was not in the JDBC code: a file in
+Git is a file in history forever. Supply it when the factory is built:
+
+```java
+// Properties passed here override persistence.xml.
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("orderdesk", Map.of(
+        "jakarta.persistence.jdbc.password", System.getenv("ORDERDESK_PASSWORD")));
+```
+
 > **Note.** `hbm2ddl.auto=validate` fails at startup when an entity and the table disagree. That
 > is exactly what you want: a mapping error becomes a startup failure rather than a wrong
-> column at runtime.
+> column at runtime. It checks columns and types only — not `CHECK` constraints, which is why
+> the status converter above matters.
 
 ## 8. Common Problems
 
@@ -309,8 +354,8 @@ join (unit 9). Do **not** fix it by switching to `EAGER`.
 
 ### Changes are not saved
 
-Either no transaction, or the entity is detached, or `hbm2ddl` rolled it back. Check the SQL log
-first: if there is no `UPDATE`, JPA never saw a change.
+Either no transaction, or the entity is detached. Check the SQL log first: if there is no
+`UPDATE`, JPA never saw a change.
 
 ### `NonUniqueResultException`
 
@@ -318,12 +363,18 @@ first: if there is no `UPDATE`, JPA never saw a change.
 
 ### An enum column stores `0`, `1`, `2`
 
-`EnumType.ORDINAL`. Switch to `STRING` and migrate the data.
+`EnumType.ORDINAL`. Switch to `STRING` — or a converter — and migrate the data.
+
+### `ERROR: new row for relation "orders" violates check constraint "orders_status_known"`
+
+`EnumType.STRING` wrote `PLACED` into a column whose `CHECK` wants `placed`. Map the enum
+through `OrderStatusConverter`.
 
 ## 9. Practical Guidelines
 
 - Give every entity a protected no-arg constructor.
-- Use `@Enumerated(EnumType.STRING)` without exception.
+- Never `EnumType.ORDINAL`; use `EnumType.STRING`, or a converter when the column has its own
+  vocabulary.
 - Make associations `LAZY` and fetch explicitly where needed.
 - Set the owning side, through a helper that keeps both sides consistent.
 - Use `hbm2ddl.auto=validate`; own the schema with SQL scripts.
@@ -334,14 +385,15 @@ first: if there is no `UPDATE`, JPA never saw a change.
 1. Which side of `Order`/`OrderLine` owns the foreign key, and what happens if you only update
    the other one?
 2. What is dirty checking? Give a case where it writes something you did not intend.
-3. Why is `EnumType.ORDINAL` dangerous? Describe the failure.
+3. Why is `EnumType.ORDINAL` dangerous? And why is `EnumType.STRING` also wrong for
+   `orders.status` in this schema?
 4. `getSingleResult` throws for a missing row. What should a repository return instead?
 5. Why is `hbm2ddl.auto=validate` preferable to `update` in this programme?
 
 ## 11. Further Reading
 
-- [Jakarta Persistence 3.1 specification](https://jakarta.ee/specifications/persistence/3.1/)
-- [Hibernate ORM User Guide](https://docs.jboss.org/hibernate/orm/6.4/userguide/html_single/Hibernate_User_Guide.html)
+- [Jakarta Persistence 3.2 specification](https://jakarta.ee/specifications/persistence/3.2/)
+- [Hibernate ORM User Guide](https://docs.jboss.org/hibernate/orm/7.1/userguide/html_single/Hibernate_User_Guide.html)
 
 ---
 

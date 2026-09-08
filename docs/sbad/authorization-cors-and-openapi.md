@@ -1,6 +1,6 @@
 # Authorization, CORS & OpenAPI
 
-> Session 7 · Spring Boot 3.3, springdoc 2.6 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 7 · Spring Boot 4.1, springdoc 3.0 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -20,10 +20,12 @@ Authentication established *who*. Authorization decides *what they may do*.
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
-        .csrf(AbstractHttpConfigurer::disable)
+        .csrf(csrf -> csrf.disable())
         .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .exceptionHandling(e -> e.authenticationEntryPoint(
+                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/auth/login").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.POST, "/api/orders/*/cancellation")
@@ -81,11 +83,12 @@ public OrderResponse findOne(@PathVariable long orderId) {
 ```
 
 ```java
-// Right — the identity comes from the token, never from the request
+// Right — the identity comes from the token, never from the request.
+// AppUserDetails is the principal from unit 6; customerId is null for staff.
 @GetMapping("/api/orders/{orderId}")
 public OrderResponse findOne(@PathVariable long orderId,
                              @AuthenticationPrincipal AppUserDetails principal) {
-    return service.findByIdForUser(orderId, principal.userId())
+    return service.findByIdFor(orderId, principal)
                   .map(OrderResponse::from)
                   .orElseThrow(() -> new OrderNotFoundException(orderId));
 }
@@ -93,10 +96,11 @@ public OrderResponse findOne(@PathVariable long orderId,
 
 ```java
 @Transactional(readOnly = true)
-public Optional<Order> findByIdForUser(long orderId, long userId) {
+public Optional<Order> findByIdFor(long orderId, AppUserDetails caller) {
     return orders.findById(orderId)
                  // 404 rather than 403: do not confirm that someone else's order exists.
-                 .filter(o -> o.customerId() == userId || currentUserIsStaff());
+                 .filter(o -> caller.isStaff()
+                           || Objects.equals(o.customerId(), caller.customerId()));
 }
 ```
 
@@ -109,11 +113,11 @@ public List<OrderResponse> list(@RequestParam long customerId) { ... }
 @GetMapping("/api/orders")
 public Page<OrderResponse> list(@AuthenticationPrincipal AppUserDetails principal,
                                 Pageable pageable) {
-    return service.listFor(principal.userId(), pageable).map(OrderResponse::from);
+    return service.listFor(principal, pageable).map(OrderResponse::from);   // staff: all
 }
 ```
 
-> **Real-world use. ** IDOR is consistently near the top of the OWASP list. It is easy to miss
+> **Real-world use.** IDOR is consistently near the top of the OWASP list. It is easy to miss
 > because every test passes: you are logged in as the owner of everything you test with.
 
 ## 4. CORS
@@ -168,7 +172,7 @@ credential for CSRF to abuse.
 <dependency>
   <groupId>org.springdoc</groupId>
   <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-  <version>2.6.0</version>
+  <version>3.0.1</version>   <!-- the 3.x line is the one built for Spring Boot 4 -->
 </dependency>
 ```
 
@@ -231,14 +235,14 @@ public class OrderController {
     @GetMapping
     public Page<OrderSummaryResponse> list(@AuthenticationPrincipal AppUserDetails principal,
                                            @PageableDefault(size = 20) Pageable pageable) {
-        return service.listFor(principal.userId(), pageable).map(OrderSummaryResponse::from);
+        return service.listFor(principal, pageable).map(OrderSummaryResponse::from);
     }
 
     @Operation(summary = "Read one order")
     @GetMapping("/{orderId}")
     public OrderResponse findOne(@PathVariable long orderId,
                                  @AuthenticationPrincipal AppUserDetails principal) {
-        return service.findByIdForUser(orderId, principal.userId())
+        return service.findByIdFor(orderId, principal)
                       .map(OrderResponse::from)
                       .orElseThrow(() -> new OrderNotFoundException(orderId));
     }

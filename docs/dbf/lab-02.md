@@ -16,7 +16,7 @@ By the end of this lab you will be able to:
 
 - You have read [DDL, Constraints & Data Integrity](ddl-and-constraints.md).
 - Lab 01 is complete — this lab implements *your* ERD from it.
-- `psql --version` reports 16.x, and `createdb` works.
+- `psql --version` reports 18.x, and `createdb` works.
 
 ## Steps
 

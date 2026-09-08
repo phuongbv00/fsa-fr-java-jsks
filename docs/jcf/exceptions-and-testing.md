@@ -1,6 +1,6 @@
 # Exceptions & Unit Testing
 
-> Session 5 · JDK 21, JUnit 5.10 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 5 · JDK 17, JUnit 5.13 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -41,8 +41,9 @@ if (quantity <= 0) {
     throw new IllegalArgumentException("quantity must be positive, was " + quantity);
 }
 
-// Checked: the database being unreachable is a real condition callers may handle.
-public Order load(long id) throws OrderNotFoundException { ... }
+// Checked: a file the caller chose may be missing or unreadable — a real condition
+// the caller can decide about (ask for another path, fall back, give up).
+public List<Product> load(Path file) throws IOException { ... }
 ```
 
 ## 3. Boundaries
@@ -264,6 +265,11 @@ class OrderServiceTest {
 
 No database, no mocking framework, and the tests run in milliseconds — because unit 4 made the
 repository an interface.
+
+`OrderNotFoundException` here is **unchecked** — it extends `RuntimeException`. Asking for an
+order that does not exist is a caller mistake in this service, not a condition every caller
+must write a `catch` for; and a checked exception could not be thrown from inside the
+`orElseThrow` lambda at all.
 
 ## 7. Reading a Stack Trace
 

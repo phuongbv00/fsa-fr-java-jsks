@@ -1,6 +1,6 @@
 # Java Syntax, Types & Methods
 
-> Session 2 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 2 · JDK 17 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -265,8 +265,8 @@ so the test needs no file.
 
 ### `NullPointerException: Cannot invoke "String.length()" because "sku" is null`
 
-Java 21 names the expression that was null. Read it: it tells you *which* reference, not just
-the line.
+Since Java 14 the message names the expression that was null. Read it: it tells you *which*
+reference, not just the line.
 
 ### `String` comparison works in tests and fails in production
 
@@ -309,8 +309,8 @@ An implicit narrowing. Say what you mean with a cast, or fix the type.
 ## 12. Further Reading
 
 - [The Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/)
-- [`java.lang.String` API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html)
-- [`java.math.BigDecimal` API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/math/BigDecimal.html)
+- [`java.lang.String` API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)
+- [`java.math.BigDecimal` API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html)
 
 ---
 

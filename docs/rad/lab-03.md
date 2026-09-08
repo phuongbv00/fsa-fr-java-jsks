@@ -20,12 +20,14 @@ By the end of this lab you will be able to:
 1. **Install `react-router-dom`** and configure a browser router.
 
 2. **Build `AppLayout`** with header, `<nav>` and `<Outlet />`. Use `NavLink` with an active
-   class and `aria-current="page"`.
+   class, and confirm in the accessibility tree that it sets `aria-current="page"` on the
+   active link by itself.
 
 3. **Add routes:** `/orders`, `/orders/:orderId`, `/products`, a redirect from `/`, and `*` last.
 
 4. **Build `OrderDetailPage`** reading `orderId` with `useParams`, converting it to a number and
-   rejecting anything that is not one. Show what `/orders/abc` renders.
+   rejecting anything that is not one — without calling a hook after the early return; hand the
+   valid id to a child component that calls `useOrder`. Show what `/orders/abc` renders.
 
 5. **Demonstrate the anchor bug.** Link to a detail page with `<a href>`, record the full reload
    and the lost state, then switch to `<Link>` and record the difference.
@@ -47,8 +49,8 @@ By the end of this lab you will be able to:
 ## Acceptance
 
 - [ ] Routes render inside `AppLayout` via `<Outlet />`; `*` is last.
-- [ ] `NavLink` marks the active route with `aria-current="page"`.
-- [ ] `orderId` is converted and validated; `/orders/abc` is handled.
+- [ ] `NavLink` marks the active route with `aria-current="page"`, set by the router.
+- [ ] `orderId` is converted and validated; `/orders/abc` is handled; no hook follows an early return.
 - [ ] The anchor-versus-Link demonstration is recorded.
 - [ ] Filters live in the URL and survive a reload in a new tab, with a screenshot.
 - [ ] The back-button behaviour with and without `replace` is recorded.

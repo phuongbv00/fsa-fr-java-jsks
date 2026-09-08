@@ -1,6 +1,6 @@
 # Collections, Generics, Lambdas & Streams
 
-> Session 6 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 6 · JDK 17 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -339,8 +339,8 @@ a sentinel.
 ## 11. Further Reading
 
 - [The Java Tutorials: Collections](https://docs.oracle.com/javase/tutorial/collections/)
-- [`java.util.stream` package summary](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html)
-- [`Collectors` API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html)
+- [`java.util.stream` package summary](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/package-summary.html)
+- [`Collectors` API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Collectors.html)
 
 ---
 

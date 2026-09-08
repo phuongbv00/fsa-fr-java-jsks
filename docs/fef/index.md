@@ -45,7 +45,7 @@ they are what separates a demo from a usable interface:
 | **Error** | It failed | The page silently shows stale or no data |
 
 > **Note.** "It works" in this module means all four states are handled. Two of the three labs
-> mark you on the states you did not write.
+> check you on the states you did not write.
 
 ## 3. How to Use This Handbook
 

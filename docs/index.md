@@ -1,8 +1,8 @@
 # Training programme
 
 The JS/KS Java Web track, from working practice through to a capstone project.
-Each module below is a week or more of teaching material: notes, guided labs, and
-the assignment briefs that go with them.
+Each module below is a week or more of teaching material: notes, guided labs, and a
+study guide.
 
 ## Learning path
 
@@ -40,8 +40,6 @@ flowchart LR
     click FEF "fef/index.md"
     click RAD "rad/index.md"
     click PRJ "prj/index.md"
-    classDef ready fill:#c8e6c9,stroke:#2e7d32,color:#1b1b1b;
-    class FND,DBF,JCF,SBAD,FEF,RAD,PRJ ready;
 ```
 
 ## Modules

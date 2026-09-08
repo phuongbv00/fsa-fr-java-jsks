@@ -84,7 +84,8 @@ these are the ones that catch people out.
 - **Detached HEAD** — `HEAD` pointing at a commit rather than a branch, so new commits
   belong to no branch.
 - **Index** — the staging area. Three names for one thing: index, staging area, cache —
-  which is why the unstage command is `git rm --cached`.
+  which is why `git rm --cached` ("remove from the cache") stops tracking a file without
+  deleting it. Unstaging a change is `git restore --staged`.
 - **Tracking branch** — a local branch that knows which remote branch it corresponds to,
   which is what `git push -u` sets up.
 - **Fast-forward** — a merge that only moves a branch label, because the history had not

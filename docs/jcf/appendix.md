@@ -69,7 +69,7 @@ mvn -X clean package       # with debug output, naming the failing plugin
 ## 6. JPA Checklist
 
 - [ ] Protected no-arg constructor on every entity
-- [ ] `@Enumerated(EnumType.STRING)`
+- [ ] Enums by `EnumType.STRING`, or a converter when the column has its own vocabulary — never `ORDINAL`
 - [ ] Associations `LAZY`
 - [ ] Owning side set through a helper that keeps both sides consistent
 - [ ] `hbm2ddl.auto=validate`
@@ -86,12 +86,12 @@ mvn -X clean package       # with debug output, naming the failing plugin
 
 ## 8. Primary Sources
 
-- [JDK 21 documentation](https://docs.oracle.com/en/java/javase/21/)
+- [JDK 17 documentation](https://docs.oracle.com/en/java/javase/17/)
 - [Maven: Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 - [The Java Tutorials: JDBC Basics](https://docs.oracle.com/javase/tutorial/jdbc/basics/)
-- [Jakarta Persistence 3.1](https://jakarta.ee/specifications/persistence/3.1/)
-- [Hibernate ORM User Guide](https://docs.jboss.org/hibernate/orm/6.4/userguide/html_single/Hibernate_User_Guide.html)
+- [Jakarta Persistence 3.2](https://jakarta.ee/specifications/persistence/3.2/)
+- [Hibernate ORM User Guide](https://docs.jboss.org/hibernate/orm/7.1/userguide/html_single/Hibernate_User_Guide.html)
 
 ---
 

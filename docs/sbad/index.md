@@ -71,11 +71,11 @@ The long assignment is issued in session 1 and completed in unit 10.
 ## 4. Environment Setup
 
 ```bash
-java -version      # expect 21.x
-mvn -version       # expect 3.9.x, reporting Java 21
-docker --version   # expect 24.x or later
+java -version      # expect 17.x
+mvn -version       # expect 3.9.x, reporting Java 17
+docker --version   # expect 27.x or later
 docker compose version
-psql --version     # expect 16.x
+psql --version     # expect 18.x
 ```
 
 Generate the project from Spring Initializr rather than by hand:
@@ -83,7 +83,7 @@ Generate the project from Spring Initializr rather than by hand:
 ```bash
 curl https://start.spring.io/starter.zip \
   -d dependencies=web,data-jpa,validation,security,postgresql,actuator \
-  -d javaVersion=21 -d bootVersion=3.3.4 -d type=maven-project \
+  -d javaVersion=17 -d bootVersion=4.1.1 -d type=maven-project \
   -d groupId=com.fsa -d artifactId=orderdesk-api \
   -d packageName=com.fsa.orderdesk -o orderdesk-api.zip
 unzip orderdesk-api.zip -d orderdesk-api && cd orderdesk-api
@@ -95,6 +95,13 @@ explains the message.
 
 > **Tip.** Use the Maven wrapper `./mvnw` that Initializr generates, not your own `mvn`. It
 > pins the Maven version for everyone on the project.
+
+Spring Boot 4 split its starters by module: `web` on Initializr becomes
+`spring-boot-starter-webmvc`, and every starter you pick gets a matching `*-test` twin
+(`spring-boot-starter-webmvc-test`, `spring-boot-starter-data-jpa-test`,
+`spring-boot-starter-security-test`) at `test` scope. If you add a starter by hand later, add
+its `-test` twin too, or the slice annotations in unit 8 will not be on the classpath.
+JSON is Jackson 3 (`tools.jackson.*`), and tests run on JUnit 6 — the Jupiter API you know.
 
 ## 5. How to Study This Module
 

@@ -79,9 +79,10 @@ Each sprint is one week and follows Scrum as taught in Foundations:
 | Sprint review | Last day | A demonstration against acceptance criteria |
 | Retrospective | Last day | One change the team will actually make |
 
-Roles rotate between sprints, so every member holds each one at least once. Rotation is not
-ceremony: the defence in unit 6 asks what you did, and "I only wrote the front end" is a weak
-answer.
+The Product Owner and Scrum Master roles rotate between sprints, so nobody holds one for the
+whole project and at least three members have held one by the end. Work rotates too: everyone
+touches every layer. Rotation is not ceremony: the defence in unit 6 asks what you did, and
+"I only wrote the front end" is a weak answer.
 
 **Every change goes through a pull request**, reviewed by a teammate who did not write it. That
 is the traceability the final review inspects, and it is why the Git and review work in

@@ -82,8 +82,10 @@ Nothing here touches a remote. You work entirely locally until session 3.
 11. Add a file named `.env` containing `API_KEY=notreal`, then run `git status` — it is
     correctly ignored. Now break it: run `git add -f .env`, commit, and add another line to
     `.env`. Run `git status` and observe that the ignore rule no longer protects it.
-    Diagnose it with `git check-ignore -v .env`, then fix it with `git rm --cached .env`
-    and commit. Confirm `.env` is untracked and still on disk.
+    Run `git check-ignore -v .env` — it prints **nothing**, because `check-ignore` does not
+    report tracked files at all. That silence is the diagnosis: the file is tracked, so no
+    rule applies. Fix it with `git rm --cached .env` and commit, then run
+    `git check-ignore -v .env` again and see it name the rule. Confirm `.env` is still on disk.
 
 12. **Lose a commit on purpose.** Commit a small change you would mind losing, note its
     subject, then run `git reset --hard HEAD~1`. Confirm with `git log --oneline` that it
@@ -94,8 +96,8 @@ Nothing here touches a remote. You work entirely locally until session 3.
     `git log --oneline --graph --decorate` one final time. Read the whole history top to
     bottom and check it tells a story a stranger could follow.
 
-14. Leave the repository clean: `git status` must report nothing to commit and no untracked
-    files other than `.env`. This is the state session 3 starts from.
+14. Leave the repository clean: `git status` must report nothing to commit, working tree
+    clean — `.env` is ignored, so it does not appear. This is the state session 3 starts from.
 
 ## Acceptance
 

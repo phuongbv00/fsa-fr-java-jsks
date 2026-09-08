@@ -1,6 +1,6 @@
 # Testing Spring Applications
 
-> Session 8 · Spring Boot 3.3, JUnit 5, Testcontainers 1.20 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 8 · Spring Boot 4.1, JUnit 6, Testcontainers 2 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -60,11 +60,17 @@ Collaborators are mocked.
 class OrderControllerTest {
 
     @Autowired private MockMvc mvc;
-    @MockitoBean private OrderService service;      // @MockBean before Boot 3.4
+    @MockitoBean private OrderService service;
+
+    // The slice loads SecurityFilterChain beans and every Filter — including our
+    // JwtAuthenticationFilter — but no @Service. Mock what the filter needs, or the
+    // context fails with "required a bean of type JwtService".
+    @MockitoBean private JwtService jwt;
+    @MockitoBean private UserDetailsService users;
 
     @Test
     void returnsAnOrder() throws Exception {
-        when(service.findByIdForUser(5001L, 42L)).thenReturn(Optional.of(anOrder()));
+        when(service.findByIdFor(eq(5001L), any())).thenReturn(Optional.of(anOrder()));
 
         mvc.perform(get("/api/orders/5001").with(user(principal(42))))
            .andExpect(status().isOk())
@@ -74,7 +80,7 @@ class OrderControllerTest {
 
     @Test
     void returns404WhenMissing() throws Exception {
-        when(service.findByIdForUser(anyLong(), anyLong())).thenReturn(Optional.empty());
+        when(service.findByIdFor(anyLong(), any())).thenReturn(Optional.empty());
 
         mvc.perform(get("/api/orders/9999").with(user(principal(42))))
            .andExpect(status().isNotFound())
@@ -112,8 +118,8 @@ class OrderRepositoryTest {
     @Container
     @ServiceConnection                       // Boot wires the datasource to this container
     static PostgreSQLContainer<?> postgres =
-            new PostgreSQLContainer<>("postgres:16-alpine")
-                    .withInitScript("schema.sql");   // your DBF schema, unchanged
+            new PostgreSQLContainer<>("postgres:18-alpine")
+                    .withInitScript("schema.sql");   // labs/dbf/orderdesk-schema, copied to src/test/resources
 
     @Autowired private OrderRepository repository;
     @Autowired private TestEntityManager em;
@@ -132,8 +138,8 @@ class OrderRepositoryTest {
 }
 ```
 
-> **Note.** Reusing the DBF `schema.sql` as the init script means the tests validate the same
-> DDL you ship. An H2 dialect difference — an unsupported type, a different `CHECK` syntax —
+> **Note.** Reusing the supplied `schema.sql` as the init script means the tests validate the
+> same DDL you ship. An H2 dialect difference — an unsupported type, a different `CHECK` syntax —
 > would otherwise be discovered in production.
 
 ## 5. Full Context and Security
@@ -146,10 +152,10 @@ class OrderApiIT {
 
     @Container
     @ServiceConnection
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:18-alpine");
 
     @Autowired private MockMvc mvc;
-    @Autowired private ObjectMapper json;
+    @Autowired private JsonMapper json;        // Jackson 3: tools.jackson.databind.json.JsonMapper
 
     @Test
     void unauthenticatedRequestsAreRejected() throws Exception {
@@ -215,7 +221,7 @@ classes and you build several.
 public abstract class AbstractIntegrationTest {
 
     static final PostgreSQLContainer<?> POSTGRES =
-            new PostgreSQLContainer<>("postgres:16-alpine");
+            new PostgreSQLContainer<>("postgres:18-alpine");
 
     static { POSTGRES.start(); }        // started once, never stopped: the JVM ends with it
 
@@ -237,13 +243,19 @@ class OrderServiceIT extends AbstractIntegrationTest { ... }
 
 ## 7. Common Problems
 
-### `@MockBean` is deprecated
+### `@MockBean` cannot be resolved
 
-Boot 3.4 replaced it with `@MockitoBean`. Same idea, new package.
+Removed in Spring Boot 4. Use `@MockitoBean` (from `org.springframework.test.context.bean.override.mockito`).
+
+### `@WebMvcTest` / `@DataJpaTest` cannot be resolved
+
+Boot 4 moved the slice annotations into per-module test starters. Add
+`spring-boot-starter-webmvc-test` or `spring-boot-starter-data-jpa-test` at `test` scope.
 
 ### `@WebMvcTest` fails with "no qualifying bean of type OrderService"
 
-Slice tests load no services. Add `@MockitoBean`.
+Slice tests load no services. Add `@MockitoBean` — and the same for `JwtService` and
+`UserDetailsService`, which the security filter drags in.
 
 ### Everything returns 401 in a `@WebMvcTest`
 

@@ -47,9 +47,10 @@ By the end of this lab you will be able to:
    numbered steps, and a **Notes for the reviewer** line naming the part you are least sure
    about. Request your reviewer from the ring.
 
-5. Try `git switch main` then `git push origin main` with a trivial change. The push is
-   **refused** by the protected branch. Read the message, undo your local change, and write
-   down in one sentence why this rule exists.
+5. Try `git switch main`, commit a trivial change there, then `git push origin main`. The push
+   is **refused** by the protected branch. Read the message, then put `main` back where the
+   remote has it with `git reset --keep origin/main` (it refuses if that would lose uncommitted
+   work), and write down in one sentence why this rule exists. Switch back to your branch.
 
 6. Review the pull request assigned to you by the ring. Leave at least four comments: one
    **blocking**, one **suggestion**, one **question**, and one saying what they did well. Every

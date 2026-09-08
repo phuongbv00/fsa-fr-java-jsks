@@ -78,12 +78,12 @@ Inside `psql`:
 
 ## 6. Primary Sources
 
-- [PostgreSQL 16 documentation](https://www.postgresql.org/docs/16/index.html)
-- [Data Definition](https://www.postgresql.org/docs/16/ddl.html)
-- [Constraints](https://www.postgresql.org/docs/16/ddl-constraints.html)
-- [Queries](https://www.postgresql.org/docs/16/queries.html)
-- [Using EXPLAIN](https://www.postgresql.org/docs/16/using-explain.html)
-- [Transaction Isolation](https://www.postgresql.org/docs/16/transaction-iso.html)
+- [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/index.html)
+- [Data Definition](https://www.postgresql.org/docs/current/ddl.html)
+- [Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
+- [Queries](https://www.postgresql.org/docs/current/queries.html)
+- [Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html)
+- [Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
 - [Mermaid ER diagrams](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
 
 ---

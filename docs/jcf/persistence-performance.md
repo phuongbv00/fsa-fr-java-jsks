@@ -1,6 +1,6 @@
 # Persistence Performance
 
-> Session 9 · JDK 21, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 9 · JDK 17, Hibernate 7.1 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -94,7 +94,7 @@ Say at the query that you need the association:
 
 ```java
 List<Order> orders = em.createQuery("""
-        SELECT DISTINCT o FROM Order o
+        SELECT o FROM Order o
         LEFT JOIN FETCH o.lines
         WHERE  o.customerId = :id
         """, Order.class)
@@ -102,9 +102,11 @@ List<Order> orders = em.createQuery("""
         .getResultList();                    // 1 query, lines already populated
 ```
 
-`LEFT JOIN FETCH` keeps orders that have no lines; a plain `JOIN FETCH` drops them. `DISTINCT`
-removes the duplicate `Order` references the join produces — the same fan-out you met in
-Database Foundations.
+`LEFT JOIN FETCH` keeps orders that have no lines; a plain `JOIN FETCH` drops them. The SQL
+behind it fans out — one row per line, the same multiplication you met in Database Foundations
+— but Hibernate 6 and later de-duplicate the parent entities for you, so an order with three
+lines comes back once. Older material insists on `SELECT DISTINCT o` for this; on Hibernate 5
+that was necessary, and today it is harmless but redundant.
 
 > **Note.** You cannot `JOIN FETCH` two collection associations in one query — the result is a
 > cartesian product. Fetch one, and use a second query or a batch size for the other.
@@ -216,7 +218,7 @@ queries = 201 for 200 orders        <-- before
 public List<Order> findByCustomer(long customerId) {
     try (EntityManager em = emf.createEntityManager()) {
         return em.createQuery("""
-                        SELECT DISTINCT o FROM Order o
+                        SELECT o FROM Order o
                         LEFT JOIN FETCH o.lines
                         WHERE  o.customerId = :customerId
                         ORDER  BY o.placedAt DESC
@@ -246,7 +248,8 @@ The context closed before the association was touched. Fetch join, entity graph,
 
 ### The fetch join returns duplicate parents
 
-A collection join multiplies rows. Add `DISTINCT`.
+You are on Hibernate 5 or reading a tutorial written for it. Hibernate 6+ de-duplicates fetch
+joins on its own; on the old version, add `DISTINCT`.
 
 ### `MultipleBagFetchException: cannot simultaneously fetch multiple bags`
 
@@ -278,16 +281,17 @@ Every query now loads the association, including the ones that never use it.
 
 1. Given a log with one `select from orders` and 200 `select from order_line`, name the defect
    and the line of code that caused it.
-2. Why does `LEFT JOIN FETCH` need `DISTINCT`, and what does the plain `JOIN` version lose?
+2. What does the plain `JOIN FETCH` version lose compared with `LEFT JOIN FETCH`, and why does
+   the fan-out of the SQL not produce duplicate orders in the result?
 3. Why is switching an association to `EAGER` a bad fix for `LazyInitializationException`?
 4. What evidence would you attach to a claim that you fixed an N+1?
 5. When is a projection better than fetching entities at all?
 
 ## 10. Further Reading
 
-- [Hibernate User Guide: Fetching](https://docs.jboss.org/hibernate/orm/6.4/userguide/html_single/Hibernate_User_Guide.html#fetching)
-- [Jakarta Persistence: Entity Graphs](https://jakarta.ee/specifications/persistence/3.1/)
-- [Hibernate Statistics](https://docs.jboss.org/hibernate/orm/6.4/javadocs/org/hibernate/stat/Statistics.html)
+- [Hibernate User Guide: Fetching](https://docs.jboss.org/hibernate/orm/7.1/userguide/html_single/Hibernate_User_Guide.html#fetching)
+- [Jakarta Persistence: Entity Graphs](https://jakarta.ee/specifications/persistence/3.2/)
+- [Hibernate Statistics](https://docs.jboss.org/hibernate/orm/7.1/javadocs/org/hibernate/stat/Statistics.html)
 
 ---
 

@@ -26,8 +26,9 @@ By the end of this lab you will be able to:
 3. **Find the IDOR.** Log in as customer A and fetch an order belonging to customer B by id.
    Record that it succeeds — this is the vulnerability.
 
-4. **Fix it.** Take the identity from `@AuthenticationPrincipal`, never from a parameter. Scope
-   the list endpoint to the caller and check ownership on the read endpoint.
+4. **Fix it.** Take the identity from `@AuthenticationPrincipal AppUserDetails` — its
+   `customerId`, never a parameter. Scope the list endpoint to the caller (staff see all) and
+   check ownership on the read endpoint.
 
 5. **Return 404, not 403,** for another customer's order. Explain the reasoning in
    `docs/authz.md`.

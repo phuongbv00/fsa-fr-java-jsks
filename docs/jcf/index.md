@@ -26,8 +26,10 @@ primary sources.
 
 ## 2. The Running Domain — OrderDesk, Again
 
-The schema is the one from Database Foundations: `customer`, `product`, `orders`, `order_line`,
-`shipment`, `return_request`. You are now writing the application that sits on top of it.
+The schema is the OrderDesk order schema you read in Database Foundations — `customer`,
+`product`, `orders`, `order_line`, `shipment`, `return_request` — supplied with its seed data in
+[`labs/dbf/orderdesk-schema`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/dbf/orderdesk-schema).
+You are now writing the application that sits on top of it.
 
 ```mermaid
 flowchart TB
@@ -60,17 +62,18 @@ Read this page before session 1, then return to section 4 whenever the build mis
 Each unit is a note plus a lab. The long assignment is issued in session 1 and worked across
 the whole module — each lab produces a piece of it.
 
-Sessions 7 to 9 need the OrderDesk database running. Rebuild it from your Database Foundations
-scripts before session 7; if you cannot, say so in session 6, not session 7.
+Sessions 7 to 9 need the OrderDesk database running. Rebuild it with
+`labs/dbf/orderdesk-schema/rebuild.sh` before session 7; if you cannot, say so in session 6,
+not session 7.
 
 ## 4. Environment Setup
 
 ```bash
-java -version      # expect 21.x
-javac -version     # expect 21.x — if this differs from java, JAVA_HOME is wrong
+java -version      # expect 17.x
+javac -version     # expect 17.x — if this differs from java, JAVA_HOME is wrong
 mvn -version       # expect 3.9.x, and check the Java version it reports
 echo $JAVA_HOME
-psql --version     # expect 16.x, from Database Foundations
+psql --version     # expect 18.x, from Database Foundations
 ```
 
 The single most common setup failure is `mvn -version` reporting a different JDK from

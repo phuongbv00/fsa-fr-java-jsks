@@ -1,6 +1,6 @@
 # Interfaces, Polymorphism & Composition
 
-> Session 4 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 4 · JDK 17 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 

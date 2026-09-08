@@ -112,7 +112,7 @@ Part B of the final review depends on this.
 - [Scrum Guide](https://scrumguides.org/scrum-guide.html)
 - [Spring Boot reference](https://docs.spring.io/spring-boot/index.html)
 - [React documentation](https://react.dev/)
-- [PostgreSQL 16 documentation](https://www.postgresql.org/docs/16/index.html)
+- [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/index.html)
 - [OWASP API Security Top 10](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
 
 ---

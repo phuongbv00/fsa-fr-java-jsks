@@ -1,6 +1,6 @@
 # SQL Querying, Plans & Transactions
 
-> Session 3 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 3 · PostgreSQL 18 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -95,14 +95,25 @@ The classic bug is filtering an outer join in `WHERE`, which quietly turns it ba
 inner join:
 
 ```sql
--- Wrong — "orders never dispatched" returns nothing.
--- The WHERE runs after the join and discards the NULL rows it was meant to keep.
-SELECT o.order_id
+-- Wrong — "every order, with its dispatched shipments" silently drops unshipped orders.
+-- The WHERE runs after the join, and s.dispatched_at is NULL on exactly the rows the
+-- LEFT JOIN was meant to keep.
+SELECT o.order_id, s.tracking_number
 FROM   orders o
 LEFT JOIN shipment s ON s.order_id = o.order_id
-WHERE  s.dispatched_at IS NULL AND s.tracking_number <> '';
+WHERE  s.dispatched_at IS NOT NULL;
 
--- Right — conditions on the outer table go in ON; the NULL test stays in WHERE.
+-- Right — a condition on the outer (right-hand) table goes in ON, so it decides what
+-- matches rather than which rows survive.
+SELECT o.order_id, s.tracking_number
+FROM   orders o
+LEFT JOIN shipment s ON s.order_id = o.order_id AND s.dispatched_at IS NOT NULL;
+```
+
+The one condition that *belongs* in `WHERE` after an outer join is the null test:
+
+```sql
+-- "Orders with no shipment at all": keep only the rows where nothing matched.
 SELECT o.order_id
 FROM   orders o
 LEFT JOIN shipment s ON s.order_id = o.order_id
@@ -119,7 +130,7 @@ order total is counted once per line.
 
 ```sql
 -- Wrong — an order with 3 lines and 2 shipments produces 6 rows,
--- so quantity is summed three times over.
+-- so every line's quantity is summed twice.
 SELECT o.order_id, sum(ol.quantity)
 FROM   orders o
 JOIN   order_line ol ON ol.order_id = o.order_id
@@ -338,8 +349,10 @@ The fix is to ask for more isolation, and pay for it:
 
 ```sql
 BEGIN ISOLATION LEVEL REPEATABLE READ;
--- A now sees 10 for its whole life, and a conflicting write fails at commit
--- with: ERROR: could not serialize access due to concurrent update
+-- A now sees 10 for its whole life. If A then tries to UPDATE a row that B changed
+-- and committed meanwhile, that UPDATE statement fails on the spot with:
+--   ERROR: could not serialize access due to concurrent update
+-- and A must ROLLBACK and retry.
 ```
 
 > **Real-world use.** This is the "two staff reserve the same unit" rule from the OrderDesk
@@ -397,9 +410,9 @@ fix, retry.
 
 ## 11. Further Reading
 
-- [PostgreSQL: Queries](https://www.postgresql.org/docs/16/queries.html)
-- [PostgreSQL: Using EXPLAIN](https://www.postgresql.org/docs/16/using-explain.html)
-- [PostgreSQL: Transaction Isolation](https://www.postgresql.org/docs/16/transaction-iso.html)
+- [PostgreSQL: Queries](https://www.postgresql.org/docs/current/queries.html)
+- [PostgreSQL: Using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html)
+- [PostgreSQL: Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
 
 ---
 

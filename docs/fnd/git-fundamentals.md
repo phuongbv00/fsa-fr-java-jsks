@@ -317,8 +317,8 @@ git reset --hard HEAD~3
 ```
 
 ```bash
-# Right — reverse the commits, keeping the record that they happened
-git revert HEAD~2..HEAD
+# Right — reverse the same three commits, keeping the record that they happened
+git revert HEAD~3..HEAD
 ```
 
 `git reset --hard` has legitimate uses, but it is the command that loses trainees' work in
@@ -359,10 +359,17 @@ The file was already tracked. See section 6 — `git rm --cached` is the fix.
 
 ### The commit contains a file you did not mean to include
 
-You ran `git add .`. Amend if you have not pushed:
+You ran `git add .`. If you have not committed yet, unstage it:
 
 ```bash
 git restore --staged unwanted.log
+```
+
+If it is already in the commit and you have not pushed, take it out of the index and amend —
+`git restore --staged` does nothing here, because the index already matches the commit:
+
+```bash
+git rm --cached unwanted.log
 git commit --amend
 ```
 

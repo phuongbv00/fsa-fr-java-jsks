@@ -1,6 +1,6 @@
 # JDBC & the Repository Pattern
 
-> Session 7 · JDK 21, PostgreSQL 16, driver 42.7 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 7 · JDK 17, PostgreSQL 18, driver 42.7 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -256,7 +256,7 @@ class JdbcOrderRepositoryIT {
 
     @BeforeAll
     static void startDatabase() {
-        dataSource = TestDatabase.freshOrderDesk();   // schema.sql + seed.sql, from DBF
+        dataSource = TestDatabase.freshOrderDesk();   // runs labs/dbf/orderdesk-schema/rebuild.sh
     }
 
     @BeforeEach
@@ -293,7 +293,7 @@ everything else passes whether or not `rollback()` is ever reached.
 ### `SQLException: relation "orders" does not exist`
 
 Connected to the wrong database, or the schema was never loaded. Check the JDBC URL, then run
-your DBF `rebuild.sh`.
+`labs/dbf/orderdesk-schema/rebuild.sh`.
 
 ### The pool hangs after some minutes
 

@@ -13,7 +13,7 @@ By the end of this lab you will be able to:
 ## Before you start
 
 - You have read [Development Environment & the Java Toolchain](toolchain-and-build.md).
-- A JDK 21 and Maven 3.9 are installed.
+- A JDK 17 and Maven 3.9 are installed.
 - You have a Git repository for this module.
 
 ## Steps
@@ -24,7 +24,7 @@ By the end of this lab you will be able to:
    java -version; javac -version; mvn -version; echo "JAVA_HOME=$JAVA_HOME"
    ```
 
-   All must report Java 21. If they do not, fix `JAVA_HOME` before continuing and record what
+   All must report Java 17. If they do not, fix `JAVA_HOME` before continuing and record what
    you changed.
 
 2. **Generate the project.**
@@ -35,9 +35,9 @@ By the end of this lab you will be able to:
      -DinteractiveMode=false
    ```
 
-3. **Set the language level.** In `pom.xml`, set `maven.compiler.release` to 21 and the source
-   encoding to UTF-8. Delete the generated JUnit 3 dependency and add `junit-jupiter` 5.10.2
-   with `test` scope.
+3. **Set the language level.** In `pom.xml`, set `maven.compiler.release` to 17 and the source
+   encoding to UTF-8. Delete the generated JUnit 4 dependency (`junit:junit:4.11`) and the
+   generated `AppTest.java` that uses it, and add `junit-jupiter` 5.13.4 with `test` scope.
 
 4. **Write something with a testable method.** Replace `App` with a class exposing a
    package-private pure method — a version string, or a small calculation — and a `main` that
@@ -68,10 +68,10 @@ By the end of this lab you will be able to:
 
 ## Acceptance
 
-- [ ] `docs/toolchain.txt` shows Java 21 from all four commands.
+- [ ] `docs/toolchain.txt` shows Java 17 from all four commands.
 - [ ] `mvn clean package` succeeds from a fresh clone.
-- [ ] `pom.xml` sets `maven.compiler.release` to 21 and UTF-8 encoding.
-- [ ] JUnit is present with `test` scope and JUnit 3 is gone.
+- [ ] `pom.xml` sets `maven.compiler.release` to 17 and UTF-8 encoding.
+- [ ] JUnit 5 is present with `test` scope and the generated JUnit 4 dependency is gone.
 - [ ] At least one test exists and passes; `target/surefire-reports/` shows it ran.
 - [ ] `java -jar target/*.jar` runs without a manifest error.
 - [ ] `docs/lifecycle.md` distinguishes all four phases by their output.

@@ -1,6 +1,6 @@
 # Validation & Error Contracts
 
-> Session 5 · Spring Boot 3.3, Jakarta Validation 3.0 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 5 · Spring Boot 4.1, Jakarta Validation 3.1 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -127,6 +127,21 @@ public class ApiExceptionHandler {
         return build(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage(), request, List.of());
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiError> onUnreadable(HttpMessageNotReadableException e,
+                                                 HttpServletRequest request) {
+        // Malformed JSON. The parser's message names the byte offset and the class; keep it out.
+        return build(HttpStatus.BAD_REQUEST, "Malformed request body", request, List.of());
+    }
+
+    // Thrown by the login endpoint in unit 6. One message for a wrong email and a wrong
+    // password alike, so the response confirms nothing about which addresses exist.
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiError> onBadCredentials(InvalidCredentialsException e,
+                                                     HttpServletRequest request) {
+        return build(HttpStatus.UNAUTHORIZED, "Invalid email or password", request, List.of());
+    }
+
     // The catch-all. Logs the detail, returns none of it.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> onUnexpected(Exception e, HttpServletRequest request) {
@@ -211,6 +226,7 @@ flowchart TB
 | `MethodArgumentNotValidException` | 400 | The body does not satisfy its constraints |
 | `HttpMessageNotReadableException` | 400 | Malformed JSON |
 | `UnknownSkuException` | 422 | Well-formed, but refers to nothing |
+| `InvalidCredentialsException` | 401 | Login failed; the body must not say which half was wrong |
 | `OrderNotFoundException` | 404 | The addressed resource does not exist |
 | `InsufficientStockException` | 409 | Conflicts with current state |
 | `IllegalStateException` from the domain | 409 | A state-machine violation |
@@ -290,7 +306,7 @@ The `message` attribute references a bundle key that is not defined.
 
 ## 11. Further Reading
 
-- [Jakarta Bean Validation 3.0](https://jakarta.ee/specifications/bean-validation/3.0/)
+- [Jakarta Bean Validation 3.0](https://jakarta.ee/specifications/bean-validation/3.1/)
 - [Spring: Error Handling for REST](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html)
 - [RFC 9457: Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)
 

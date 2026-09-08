@@ -33,8 +33,9 @@ By the end of this lab you will be able to:
    it — not "lazy loading". Lazy loading is correct; the defect is where the collection is
    touched.
 
-6. **Fix it with a fetch join.** Rewrite the query with `LEFT JOIN FETCH` and `DISTINCT`.
-   Explain in a comment why `LEFT` rather than plain `JOIN`, and why `DISTINCT` is needed.
+6. **Fix it with a fetch join.** Rewrite the query with `LEFT JOIN FETCH`. Explain in a comment
+   why `LEFT` rather than plain `JOIN`, and why the SQL fan-out does not give you each order
+   three times.
 
 7. **Verify.** Re-run the measuring test. Change its assertion to `assertEquals(1, queries)` so
    it fails if anyone reintroduces the lazy path. Save `docs/log_after.txt`.
@@ -54,7 +55,7 @@ By the end of this lab you will be able to:
 - [ ] At least 200 orders are seeded, with a variable number of lines each.
 - [ ] `docs/log_before.txt` shows one parent query and many child queries, annotated.
 - [ ] The cause names the Java line, not "lazy loading".
-- [ ] The fixed query uses `LEFT JOIN FETCH` with `DISTINCT`, both explained.
+- [ ] The fixed query uses `LEFT JOIN FETCH`, with `LEFT` and the absence of duplicates explained.
 - [ ] The measuring test asserts a query count and would fail on regression.
 - [ ] `docs/log_after.txt` shows a single statement.
 - [ ] The eager experiment is recorded, reverted, and argued against.

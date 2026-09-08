@@ -1,6 +1,6 @@
 # Containerization, Configuration & Observability
 
-> Session 9 · Spring Boot 3.3, Docker 24 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 9 · Spring Boot 4.1, Docker 27 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -20,7 +20,7 @@ runs in production.
 
 ```dockerfile
 # Dockerfile — multi-stage: build with Maven, ship without it.
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /build
 
 # Copy the descriptor first. Dependencies re-download only when the pom changes,
@@ -32,7 +32,7 @@ RUN ./mvnw -B dependency:go-offline
 COPY src/ src/
 RUN ./mvnw -B clean package -DskipTests
 
-FROM eclipse-temurin:21-jre-alpine AS runtime
+FROM eclipse-temurin:17-jre-alpine AS runtime
 WORKDIR /app
 
 # Never run as root: a container escape then owns the host user.
@@ -66,7 +66,7 @@ you do not need in production.
 # compose.yaml
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_DB: orderdesk
       POSTGRES_USER: orderdesk
@@ -75,7 +75,9 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      # Copied from labs/dbf/orderdesk-schema. Init scripts run once, on first start of the volume.
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sql/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U orderdesk -d orderdesk"]
       interval: 5s
@@ -161,7 +163,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus     # never "*"
+        include: health,info,metrics                # never "*"
   endpoint:
     health:
       show-details: when-authorized                 # never "always"

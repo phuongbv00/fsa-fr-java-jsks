@@ -13,13 +13,15 @@ By the end of this lab you will be able to:
 ## Before you start
 
 - You have read [Spring Boot IoC, Beans, Dependency Injection & Configuration](ioc-beans-and-configuration.md).
-- Your OrderDesk database from Database Foundations rebuilds cleanly.
+- The OrderDesk database rebuilds cleanly with `labs/dbf/orderdesk-schema/rebuild.sh`.
 - Docker is available.
 
 ## Steps
 
 1. **Generate the project** from Spring Initializr with `web`, `data-jpa`, `validation`,
-   `security`, `postgresql` and `actuator`. Java 21, Maven, package `com.fsa.orderdesk`.
+   `security`, `postgresql` and `actuator`. Spring Boot 4.1.1, Java 17, Maven, package
+   `com.fsa.orderdesk`. Copy the domain types, `OrderStatusConverter` and the entities from
+   Java Core into it.
 
 2. **Start it and read the failure.** Run `./mvnw spring-boot:run` before configuring anything.
    Paste the datasource error into `docs/startup.md` and explain in one sentence what Spring was

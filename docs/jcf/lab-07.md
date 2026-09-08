@@ -13,7 +13,8 @@ By the end of this lab you will be able to:
 ## Before you start
 
 - You have read [JDBC & the Repository Pattern](jdbc-and-repositories.md).
-- Your OrderDesk database from Database Foundations rebuilds with `./rebuild.sh`.
+- The OrderDesk database rebuilds with `labs/dbf/orderdesk-schema/rebuild.sh` and
+  `psql orderdesk -c "SELECT count(*) FROM orders"` returns 4.
 - Lab 06 is complete.
 
 ## Steps
@@ -43,9 +44,11 @@ By the end of this lab you will be able to:
    constraint, then asserts the order row count is unchanged. This test is the point of the
    lab — without it nothing shows the transaction works.
 
-9. **Prove injection is prevented.** Write a test passing `1 OR 1=1` where a value is expected,
-   asserting it returns nothing or throws rather than returning every row. Record it in
-   `docs/jdbc.md`.
+9. **Prove injection is prevented.** Add `findByCustomerEmail(String email)` to the repository
+   — a `long` parameter cannot carry an attack, which is itself worth writing down. Pass
+   `' OR '1'='1` as the email and assert it returns nothing rather than every order. Then
+   build the same query by string concatenation in a scratch test, run the same input, and
+   record both results in `docs/jdbc.md`.
 
 10. **Show a leak, then fix it.** Temporarily rewrite one method without try-with-resources,
     run a loop of 100 failing calls against a pool of size 5, and record the hang or timeout in

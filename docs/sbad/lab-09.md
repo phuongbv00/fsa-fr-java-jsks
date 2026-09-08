@@ -29,8 +29,8 @@ By the end of this lab you will be able to:
 3. **Measure the image.** Record the size. Then build a single-stage JDK version and record that
    size too, with the difference explained.
 
-4. **Write `compose.yaml`** with the api and a PostgreSQL service, a named volume, an init script
-   from your DBF `schema.sql`, and a healthcheck.
+4. **Write `compose.yaml`** with the api and a PostgreSQL service, a named volume, init scripts
+   from the supplied `schema.sql` and `seed.sql`, and a healthcheck.
 
 5. **Use the health condition.** Show `depends_on` without `service_healthy` failing on a cold
    start, then add the condition and show it succeeding. Record both.

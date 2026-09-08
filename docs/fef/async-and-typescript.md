@@ -100,9 +100,13 @@ async function readError(response) {
 }
 ```
 
-A typed request with a token and a timeout:
+A typed request with a token and a timeout. `token` is whatever the login step of the lab
+stored — one module-level variable, set in one place:
 
 ```javascript
+let token = null;
+export function setToken(value) { token = value; }
+
 export async function request(path, options = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10_000);
@@ -204,6 +208,7 @@ function label(status: OrderStatus): string {
 {
   "compilerOptions": {
     "target": "ES2022",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],   // ES2024 for Object.groupBy, unit 2
     "module": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,

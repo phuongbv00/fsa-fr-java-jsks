@@ -1,6 +1,6 @@
 # Spring Boot IoC, Beans, Dependency Injection & Configuration
 
-> Session 1 · Spring Boot 3.3, JDK 21 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 1 · Spring Boot 4.1, JDK 17 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 

@@ -1,6 +1,6 @@
 # DDL, Constraints & Data Integrity
 
-> Session 2 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 2 · PostgreSQL 18 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -272,10 +272,12 @@ CREATE TABLE shipment (
     shipment_id     bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_id        bigint NOT NULL REFERENCES orders (order_id) ON DELETE CASCADE,
     tracking_number text NOT NULL UNIQUE,
-    dispatched_at   timestamptz NOT NULL DEFAULT now(),
+    -- A parcel exists once it is packed; it is dispatched later, so this is nullable.
+    dispatched_at   timestamptz,
     delivered_at    timestamptz,
     CONSTRAINT shipment_delivery_after_dispatch
-        CHECK (delivered_at IS NULL OR delivered_at >= dispatched_at)
+        CHECK (delivered_at IS NULL
+               OR (dispatched_at IS NOT NULL AND delivered_at >= dispatched_at))
 );
 
 CREATE TABLE shipment_line (
@@ -290,11 +292,13 @@ CREATE TABLE return_request (
     return_request_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_id    bigint NOT NULL REFERENCES orders (order_id),
     raised_at   timestamptz NOT NULL DEFAULT now(),
-    reason      text NOT NULL,
     approved_by bigint REFERENCES staff (staff_id) ON DELETE SET NULL,
     approved_at timestamptz,
+    reason      text,
+    -- Unapproved: all three null. Approved: clerk, time and reason all present.
     CONSTRAINT return_approval_is_complete
-        CHECK ((approved_by IS NULL) = (approved_at IS NULL))
+        CHECK ((approved_by IS NULL) = (approved_at IS NULL)
+               AND (approved_by IS NULL OR reason IS NOT NULL))
 );
 
 CREATE TABLE return_line (
@@ -314,7 +318,8 @@ psql orderdesk -f schema.sql        # must succeed again, unchanged
 ```
 
 ```sql
--- Evidence that the rules are enforced. Each of these must fail.
+-- Evidence that the rules are enforced. Run after seed.sql — on an empty database the
+-- DELETE below deletes nothing and succeeds. Each of these must fail.
 INSERT INTO order_line (order_id, product_id, quantity, unit_price)
 VALUES (1, 1, 0, 10.00);
 -- ERROR: new row violates check constraint "order_line_quantity_check"
@@ -322,7 +327,7 @@ VALUES (1, 1, 0, 10.00);
 INSERT INTO orders (customer_id, status) VALUES (1, 'shpped');
 -- ERROR: new row violates check constraint "orders_status_check"
 
-DELETE FROM product WHERE product_id = 1;
+DELETE FROM product WHERE product_id = 1;      -- a product that has been ordered
 -- ERROR: update or delete on table "product" violates foreign key constraint
 ```
 
@@ -383,9 +388,9 @@ every rule then has to be enforced somewhere else, forever.
 
 ## 11. Further Reading
 
-- [PostgreSQL: Constraints](https://www.postgresql.org/docs/16/ddl-constraints.html)
-- [PostgreSQL: Data Types](https://www.postgresql.org/docs/16/datatype.html)
-- [PostgreSQL: ALTER TABLE](https://www.postgresql.org/docs/16/sql-altertable.html)
+- [PostgreSQL: Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
+- [PostgreSQL: Data Types](https://www.postgresql.org/docs/current/datatype.html)
+- [PostgreSQL: ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html)
 
 ---
 

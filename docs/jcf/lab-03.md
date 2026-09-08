@@ -37,16 +37,18 @@ Database Foundations:
 2. **Implement `Sku` as a record** with a compact constructor rejecting a malformed value. Test
    three malformed inputs and one valid one.
 
-3. **Implement `Money` as a record** with `plus`, `times` and a comparison. Adding a different
-   currency throws, and the message names both currencies.
+3. **Implement `Money` as a record** with `plus`, `times`, `isGreaterThan`, and the factories
+   `Money.of("25000", "VND")` and `Money.zero("VND")` — the next two units use all of them.
+   Adding a different currency throws, and the message names both currencies.
 
 4. **Implement `OrderStatus` as an enum** with `dbValue()`, a `fromDb` that throws on unknown
    input, and a `canBeCancelled()` used by `Order`.
 
 5. **Implement `OrderLine`** validating in the constructor, with no setters and a `lineTotal()`.
 
-6. **Implement `Order`** as a class enforcing the state rules, exposing `lines()` as an
-   unmodifiable view, with `equals`/`hashCode` on id only.
+6. **Implement `Order`** as a class enforcing the state rules, exposing `id()`, `customerId()`,
+   `placedAt()`, `status()` and `lines()` as an unmodifiable view, with `equals`/`hashCode` on
+   id only. Add `markDispatched()` alongside `cancel()` — unit 5's tests need it.
 
 7. **Prove the encapsulation.** Write a test asserting that mutating the list returned by
    `lines()` throws, and does not change the order.

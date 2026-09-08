@@ -78,7 +78,7 @@ Two things you will read elsewhere that are out of date here:
 - `git checkout` doing two unrelated jobs. This module uses `git switch` for branches and
   `git restore` for files. `git checkout` still works and you will see it in older
   answers; it is not wrong, just ambiguous.
-- Advice to `git push --force`. Use `--force-with-lease`. Section 5 of
+- Advice to `git push --force`. Use `--force-with-lease`. Section 7 of
   [Pull Requests & Collaborative Workflow](pull-requests-and-conflicts.md) says why.
 
 ## 5. Environment Setup
@@ -129,7 +129,7 @@ it matters.
 3. Ask a peer. Explaining the state you are in out loud resolves it surprisingly often.
 4. Ask the trainer. Bring the output, not a description of the output.
 
-**About the AI assistant.** You may use it throughout this module, and unit 3 is about
+**About the AI assistant.** You may use it throughout this module, and unit 4 is about
 using it well. The one rule that applies from day 1: work you cannot explain earns no
 credit. If the assistant wrote something you do not understand, you have not finished.
 

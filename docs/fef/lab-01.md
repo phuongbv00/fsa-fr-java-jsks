@@ -33,8 +33,9 @@ By the end of this lab you will be able to:
 6. **Lay out the page with Grid** using `grid-template-areas`, and the toolbar with Flexbox
    using `gap`.
 
-7. **Make it responsive, mobile first.** Single column below 48rem; sidebar and main above it;
-   wider sidebar above 75rem. Breakpoints in `rem`.
+7. **Make it responsive, mobile first.** Single column below 48rem with the nav as a row under
+   the header — never `display: none`; sidebar and main above it; wider sidebar above 75rem.
+   Breakpoints in `rem`.
 
 8. **Prove the viewport tag matters.** Remove it, screenshot the phone rendering, restore it,
    screenshot again. Put both in `docs/layout.md` with one sentence explaining the difference.

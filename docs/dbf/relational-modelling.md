@@ -1,6 +1,6 @@
 # Relational Modelling & Normalization
 
-> Session 1 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 1 · PostgreSQL 18 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -303,8 +303,9 @@ The remaining OrderDesk rule:
 Reading it out:
 
 - `RETURN_REQUEST` is counted and looked up → entity.
-- `reason` describes one return request → attribute, and it is `NOT NULL` because "must give
-  a reason" is a rule, not a preference.
+- `reason` describes one return request → attribute. It is unknown until a clerk approves,
+  so it is nullable — but "must give a reason" is a rule, not a preference, so a `CHECK`
+  ties it to the approval (unit 2, section 5).
 - The approving clerk is `STAFF`, related one-to-many.
 - "covers one or more lines" is many-to-many between the request and `ORDER_LINE`, so there
   is a junction — and it has a quantity, because you can return one of the two keyboards.
@@ -383,8 +384,8 @@ table that referenced it.
 
 ## 11. Further Reading
 
-- [PostgreSQL: Data Definition](https://www.postgresql.org/docs/16/ddl.html)
-- [PostgreSQL: Constraints](https://www.postgresql.org/docs/16/ddl-constraints.html)
+- [PostgreSQL: Data Definition](https://www.postgresql.org/docs/current/ddl.html)
+- [PostgreSQL: Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
 - [Mermaid: Entity Relationship Diagrams](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
 
 ---

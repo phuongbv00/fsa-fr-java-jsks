@@ -1,6 +1,6 @@
 # Modern JavaScript, the DOM & Events
 
-> Session 2 · ES2023 · See [Frontend Foundations — Study Guide](index.md).
+> Session 2 · ES2024 · See [Frontend Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 

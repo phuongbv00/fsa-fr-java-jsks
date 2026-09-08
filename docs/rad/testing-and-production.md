@@ -1,6 +1,6 @@
 # Testing, Error Boundaries & the Production Build
 
-> Session 6 · Vitest 2, Testing Library 16, Vite 5 · See [React Application Development — Study Guide](index.md).
+> Session 6 · Vitest 3, Testing Library 16, MSW 2, Vite 7 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -229,16 +229,25 @@ grep -r "password\|secret" dist/assets/*.js && echo "LEAK" || echo "clean"
 ## 7. Worked Example — A Full Test
 
 ```tsx
-test('a customer signs in, sees their orders, and cancels one', async () => {
+test('a staff member signs in, sees the orders, and cancels one', async () => {
+    // The mock keeps a little state, so the refetch after the cancel shows the change.
+    let status: OrderStatus = 'PLACED';
     server.use(
         http.post('*/api/auth/login', () => HttpResponse.json({ accessToken: 'test-token' })),
         http.get('*/api/auth/me', () =>
-            HttpResponse.json({ email: 'mai@example.com', roles: ['ROLE_STAFF'] })),
-        http.get('*/api/orders', () => HttpResponse.json({ content: [order(5001, 'PLACED')] })),
-        http.post('*/api/orders/5001/cancellation', () => new HttpResponse(null, { status: 204 })),
+            HttpResponse.json({ email: 'linh@orderdesk.example', customerId: null,
+                                roles: ['ROLE_STAFF'] })),
+        http.get('*/api/orders', () => HttpResponse.json({ content: [order(5001, status)] })),
+        http.post('*/api/orders/5001/cancellation', () => {
+            status = 'CANCELLED';
+            return new HttpResponse(null, { status: 204 });
+        }),
     );
 
-    render(<App />, { wrapper: MemoryRouter });
+    // The app's own router is a browser router; a test needs a memory one over the same
+    // route table. Wrapping <RouterProvider> in <MemoryRouter> would throw: routers do not nest.
+    const router = createMemoryRouter(routes, { initialEntries: ['/login'] });
+    render(<AuthProvider><RouterProvider router={router} /></AuthProvider>);
 
     await userEvent.type(screen.getByLabelText(/email/i), 'mai@example.com');
     await userEvent.type(screen.getByLabelText(/password/i), 'correct-horse');
@@ -266,7 +275,13 @@ It is a `div`. Fix the component, not the test.
 
 ### `useNavigate() may be used only in the context of a Router`
 
-Wrap the render in `MemoryRouter`.
+Wrap the render in `MemoryRouter` — or, for the whole app, build a `createMemoryRouter` over
+the exported `routes` and render a `RouterProvider`.
+
+### `You cannot render a <Router> inside another <Router>`
+
+The app already renders `RouterProvider`. Do not wrap it in `MemoryRouter`; use
+`createMemoryRouter` instead.
 
 ### `not wrapped in act(...)`
 

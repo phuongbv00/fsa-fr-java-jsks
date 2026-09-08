@@ -1,6 +1,6 @@
 # Object-Oriented Design & Modern Java Types
 
-> Session 3 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 3 · JDK 17 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -359,7 +359,7 @@ Include the offending value in the message.
 
 - [The Java Tutorials: Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/)
 - [JEP 395: Records](https://openjdk.org/jeps/395)
-- [`Object.equals` contract](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object))
+- [`Object.equals` contract](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object))
 
 ---
 
