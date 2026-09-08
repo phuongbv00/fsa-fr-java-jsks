@@ -101,7 +101,6 @@ nav:
       - "Lab 02 — Build, branch and recover an OrderDesk repository": fnd/lab-02.md
       - "Lab 03 — Pull requests, review and a rehearsed conflict": fnd/lab-03.md
       - "Lab 04 — Provoke the failure modes, then work the loop": fnd/lab-04.md
-    - Templates:
   - DBF:
     - dbf/index.md
     - Notes:
