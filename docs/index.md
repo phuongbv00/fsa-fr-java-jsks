@@ -8,19 +8,22 @@ the assignment briefs that go with them.
 
 ```mermaid
 flowchart LR
-    subgraph Semester_1["Semester 1"]
+    subgraph Common["Common"]
         direction LR
         FND["FND<br/>5d"]
         DBF["DBF<br/>5d"]
-        JCF["JCF<br/>13d"]
     end
-    subgraph Semester_2["Semester 2"]
+    subgraph Java["Java"]
         direction LR
+        JCF["JCF<br/>13d"]
         SBAD["SBAD<br/>13d"]
+    end
+    subgraph Front_end["Front-end"]
+        direction LR
         FEF["FEF<br/>5d"]
         RAD["RAD<br/>9d"]
     end
-    subgraph Semester_3["Semester 3"]
+    subgraph Project["Project"]
         direction LR
         PRJ["PRJ<br/>20d"]
     end
@@ -33,24 +36,29 @@ flowchart LR
     click FND "fnd/index.md"
     click DBF "dbf/index.md"
     click JCF "jcf/index.md"
+    click SBAD "sbad/index.md"
+    click FEF "fef/index.md"
+    click RAD "rad/index.md"
+    click PRJ "prj/index.md"
     classDef ready fill:#c8e6c9,stroke:#2e7d32,color:#1b1b1b;
-    class FND,DBF,JCF ready;
+    class FND,DBF,JCF,SBAD,FEF,RAD,PRJ ready;
 ```
 
 ## Modules
 
-| # | Module | Title | Semester | Days | Contents | Status |
+| # | Module | Title | Track | Days | Contents | Status |
 |---|---|---|---|---:|---|---|
-| 1 | [FND](fnd/index.md) | Agile, Git & AI-Assisted Development Foundations | Semester 1 | 5 | 6 notes · 4 labs · 3 assignments | Available |
-| 2 | [DBF](dbf/index.md) | Database Foundations | Semester 1 | 5 | 5 notes · 3 labs · 0 assignments | Available |
-| 3 | [JCF](jcf/index.md) | Java Core, JDBC & JPA/Hibernate Persistence | Semester 1 | 13 | 11 notes · 9 labs · 0 assignments | Available |
-| 4 | SBAD | Spring Boot API Development | Semester 2 | 13 | — | In preparation |
-| 5 | FEF | Frontend Foundations: HTML, CSS, JavaScript & TypeScript | Semester 2 | 5 | — | In preparation |
-| 6 | RAD | React Application Development | Semester 2 | 9 | — | In preparation |
-| 7 | PRJ | Mock Project (Capstone) | Semester 3 | 20 | — | In preparation |
+| 1 | [FND](fnd/index.md) | Agile, Git & AI-Assisted Development Foundations | Common | 5 | 6 notes · 4 labs · 0 assignments | Available |
+| 2 | [DBF](dbf/index.md) | Database Foundations | Common | 5 | 5 notes · 3 labs · 0 assignments | Available |
+| 3 | [JCF](jcf/index.md) | Java Core, JDBC & JPA/Hibernate Persistence | Java | 13 | 11 notes · 9 labs · 0 assignments | Available |
+| 4 | [SBAD](sbad/index.md) | Spring Boot API Development | Java | 13 | 11 notes · 9 labs · 0 assignments | Available |
+| 5 | [FEF](fef/index.md) | Frontend Foundations: HTML, CSS, JavaScript & TypeScript | Front-end | 5 | 5 notes · 3 labs · 0 assignments | Available |
+| 6 | [RAD](rad/index.md) | React Application Development | Front-end | 9 | 8 notes · 6 labs · 0 assignments | Available |
+| 7 | [PRJ](prj/index.md) | Mock Project (Capstone) | Project | 20 | 2 notes · 0 labs · 0 assignments | Available |
 
 ## What is here, and what is not
 
-Teaching material and assignment briefs are published here. Exam and quiz briefs are
-not — those are handed out through Google Classroom when the assessment is sat.
-Grading rubrics and answer keys are instructor-only and never leave the source repo.
+This site carries teaching material: notes, guided labs and study guides. Assessment
+briefs are not published here — assignments, quizzes and exams are graded work, and
+they are handed out through Google Classroom when they are set. Grading rubrics and
+answer keys are instructor-only and never leave the source repository.

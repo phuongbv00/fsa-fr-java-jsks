@@ -101,7 +101,6 @@ nav:
       - "Lab 02 — Build, branch and recover an OrderDesk repository": fnd/lab-02.md
       - "Lab 03 — Pull requests, review and a rehearsed conflict": fnd/lab-03.md
       - "Lab 04 — Provoke the failure modes, then work the loop": fnd/lab-04.md
-    - Assignments:
     - Templates:
   - DBF:
     - dbf/index.md
@@ -137,3 +136,58 @@ nav:
       - "Lab 07 — A JDBC repository with integration tests": jcf/lab-07.md
       - "Lab 08 — The same repository with JPA": jcf/lab-08.md
       - "Lab 09 — Diagnose and fix an N+1": jcf/lab-09.md
+  - SBAD:
+    - sbad/index.md
+    - Notes:
+      - "Spring Boot IoC, Beans, Dependency Injection & Configuration": sbad/ioc-beans-and-configuration.md
+      - "REST Controllers, DTOs & HTTP Semantics": sbad/rest-controllers-and-dtos.md
+      - "Spring Data JPA": sbad/spring-data-jpa.md
+      - "Service Layer, Transactions & Locking": sbad/services-and-transactions.md
+      - "Validation & Error Contracts": sbad/validation-and-error-contracts.md
+      - "Authentication with Spring Security & JWT": sbad/authentication-and-jwt.md
+      - "Authorization, CORS & OpenAPI": sbad/authorization-cors-and-openapi.md
+      - "Testing Spring Applications": sbad/testing-spring-applications.md
+      - "Containerization, Configuration & Observability": sbad/containerization-and-observability.md
+      - "Spring Boot API Development — Appendix": sbad/appendix.md
+    - Labs:
+      - "Lab 01 — Bootstrap the API and wire it with configuration": sbad/lab-01.md
+      - "Lab 02 — REST endpoints with a DTO boundary": sbad/lab-02.md
+      - "Lab 03 — Repositories, queries and projections": sbad/lab-03.md
+      - "Lab 04 — Services, transactions and an invariant": sbad/lab-04.md
+      - "Lab 05 — Validation and one error contract": sbad/lab-05.md
+      - "Lab 06 — Authentication with JWT": sbad/lab-06.md
+      - "Lab 07 — Authorization, ownership, CORS and a published contract": sbad/lab-07.md
+      - "Lab 08 — A test suite with real security paths": sbad/lab-08.md
+      - "Lab 09 — Containerize, configure and observe": sbad/lab-09.md
+  - FEF:
+    - fef/index.md
+    - Notes:
+      - "Semantic HTML & Responsive Layout": fef/semantic-html-and-layout.md
+      - "Modern JavaScript, the DOM & Events": fef/javascript-dom-and-events.md
+      - "Async JavaScript & Strict TypeScript": fef/async-and-typescript.md
+      - "Frontend Foundations — Appendix": fef/appendix.md
+    - Labs:
+      - "Lab 01 — Build the orders screen, semantic and responsive": fef/lab-01.md
+      - "Lab 02 — Render from data and handle events": fef/lab-02.md
+      - "Lab 03 — Typed access to the real API": fef/lab-03.md
+  - RAD:
+    - rad/index.md
+    - Notes:
+      - "React, JSX, Components & State": rad/components-and-state.md
+      - "Effects, Data Fetching & Custom Hooks": rad/effects-and-data-fetching.md
+      - "Routing & Shared Layouts": rad/routing-and-layouts.md
+      - "Forms, Validation & Mutations": rad/forms-and-mutations.md
+      - "Authentication, Authorization & Shared State": rad/auth-and-shared-state.md
+      - "Testing, Error Boundaries & the Production Build": rad/testing-and-production.md
+      - "React Application Development — Appendix": rad/appendix.md
+    - Labs:
+      - "Lab 01 — Components, props and state": rad/lab-01.md
+      - "Lab 02 — Effects, fetching and a custom hook": rad/lab-02.md
+      - "Lab 03 — Routing, layouts and URL state": rad/lab-03.md
+      - "Lab 04 — Forms, validation and mutations": rad/lab-04.md
+      - "Lab 05 — Session state and protected routes": rad/lab-05.md
+      - "Lab 06 — Tests, an error boundary and a production build": rad/lab-06.md
+  - PRJ:
+    - prj/index.md
+    - Notes:
+      - "Mock Project (Capstone) — Appendix": prj/appendix.md
