@@ -1,10 +1,10 @@
 # Lab 01 — Model the OrderDesk returns domain
 
-**Duration:** 90 min · **Objectives:** DBF-K1
+**Duration:** 90 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Extract entities, attributes and relationships from a written domain description.
 - Assign and justify cardinality at both ends of every relationship.

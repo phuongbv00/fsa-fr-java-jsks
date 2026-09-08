@@ -1,10 +1,10 @@
 # JPA & Hibernate Mapping
 
-> Objectives: JCF-K3 · Session 8 · JDK 21, Jakarta Persistence 3.1, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 8 · JDK 21, Jakarta Persistence 3.1, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Map a class to a table with `@Entity`, `@Id` and column mappings.
 - Map one-to-many and many-to-one relationships and identify the owning side.

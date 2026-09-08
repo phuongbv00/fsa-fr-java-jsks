@@ -104,8 +104,9 @@ explains the message.
   check the status code and the body shape, not just that a response arrived.
 - **Keep SQL logging on.** Everything from Java Core unit 9 still applies, and Spring Data makes
   N+1 easier to create by accident.
-- **Never trust a happy path alone.** Half the marks in this module are in the failure paths:
-  a wrong password, an expired token, another user's order, a validation error.
+- **Never trust a happy path alone.** Most of the difficulty in this module is in the failure
+  paths: a wrong password, an expired token, another user's order, a validation error. Try each
+  of them by hand before you call something finished.
 - **Externalize configuration from day one.** A password in `application.yml` is the same
   mistake as a password in source.
 

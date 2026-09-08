@@ -1,10 +1,10 @@
 # Service Layer, Transactions & Locking
 
-> Objectives: SBAD-K2 · Session 4 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 4 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Place business logic in a service rather than in a controller or a repository.
 - Apply `@Transactional` at the right boundary and explain why it is that one.

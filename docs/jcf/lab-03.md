@@ -1,10 +1,10 @@
 # Lab 03 — Model the OrderDesk domain
 
-**Duration:** 120 min · **Objectives:** JCF-K1
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Design classes whose constructors make invalid instances impossible.
 - Choose between `record`, `enum` and `class` for a given concept.

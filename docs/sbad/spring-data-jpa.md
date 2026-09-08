@@ -1,10 +1,10 @@
 # Spring Data JPA
 
-> Objectives: SBAD-K2 · Session 3 · Spring Boot 3.3, Hibernate 6.4 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 3 · Spring Boot 3.3, Hibernate 6.4 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Declare a repository interface and explain where the implementation comes from.
 - Write derived query methods and know when to switch to `@Query`.

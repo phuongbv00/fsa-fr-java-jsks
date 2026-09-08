@@ -57,10 +57,10 @@ misbehaves or a term stops making sense.
 
 Each unit is a note plus a lab:
 
-1. The trainer teaches the note.
-2. You do the lab, which is guided and checkable — you can tell when it is done.
-3. The long assignment, issued in session 1, is worked across the whole module.
-4. A quiz closes units 1 and 3.
+1. Read the note, or follow it in the session.
+2. Work the lab. It is guided and checkable, so you can tell when it is done.
+3. Keep chipping at the long assignment — you get it in session 1 and build it all week.
+4. Take the quiz that closes units 1 and 3.
 
 The long assignment is not a homework you start on the last day. Its brief is issued in
 session 1 deliberately, because every lab produces a piece of it.

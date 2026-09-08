@@ -1,10 +1,10 @@
 # Lab 09 — Containerize, configure and observe
 
-**Duration:** 150 min · **Objectives:** SBAD-K4
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Build a small, non-root container image for the application.
 - Run the application and database together with Compose.

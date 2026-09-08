@@ -1,13 +1,13 @@
 # Lab 02 — Build, branch and recover an OrderDesk repository
 
-**Duration:** 150 min · **Objectives:** FND-K2
+**Duration:** 150 min
 
 The longest lab in the module, and the one that everything in session 3 depends on. Type
 the commands rather than pasting them, and read the output of each before the next.
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Create a repository and make focused commits with messages that explain why.
 - Stage part of a file's changes to separate two unrelated edits.

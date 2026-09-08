@@ -1,10 +1,10 @@
 # Lab 01 — Build the orders screen, semantic and responsive
 
-**Duration:** 150 min · **Objectives:** FEF-K1
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Structure a page with landmarks and a correct heading outline.
 - Build a labelled, keyboard-operable filter form.

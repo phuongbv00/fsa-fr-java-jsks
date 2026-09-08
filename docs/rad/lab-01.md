@@ -1,10 +1,10 @@
 # Lab 01 — Components, props and state
 
-**Duration:** 120 min · **Objectives:** RAD-K1
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Scaffold a typed React project and compose components.
 - Distinguish props, state and derived state.

@@ -1,10 +1,10 @@
 # Async JavaScript & Strict TypeScript
 
-> Objectives: FEF-K3 · Session 3 · TypeScript 5.6 · See [Frontend Foundations — Study Guide](index.md).
+> Session 3 · TypeScript 5.6 · See [Frontend Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Use promises and `async`/`await`, and handle rejection correctly.
 - Call an HTTP API with `fetch`, checking status rather than assuming success.

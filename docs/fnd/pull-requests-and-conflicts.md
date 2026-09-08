@@ -1,10 +1,10 @@
 # Pull Requests & Collaborative Workflow
 
-> Objectives: FND-K2 · Session 3 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
+> Session 3 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Explain what a remote is and how a local branch tracks one.
 - Push a branch and open a pull request that a reviewer can act on.
@@ -48,14 +48,14 @@ that is behind most confusing messages in this unit.
 
 ## 3. The Collaborative Loop
 
-```text
-  main ─────────────────────────────────────────> (protected: no direct pushes)
-    │                                        ▲
-    │ switch -c                              │ merge, after review
-    ▼                                        │
-  feature/cancellation-window ──> commits ──> push ──> pull request ──> review
-                                                            ▲             │
-                                                            └── revise ───┘
+```mermaid
+flowchart LR
+    M["main<br/><i>protected: no direct pushes</i>"] -->|git switch -c| F["feature/cancellation-window"]
+    F --> C["commits"] --> P["git push"] --> PR["pull request"]
+    PR --> RV{"review"}
+    RV -->|changes requested| C
+    RV -->|approved| MG["merge into main"]
+    MG --> M
 ```
 
 Every change reaches `main` the same way, including small ones:

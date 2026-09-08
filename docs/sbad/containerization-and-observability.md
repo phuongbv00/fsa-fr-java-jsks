@@ -1,10 +1,10 @@
 # Containerization, Configuration & Observability
 
-> Objectives: SBAD-K4 · Session 9 · Spring Boot 3.3, Docker 24 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 9 · Spring Boot 3.3, Docker 24 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Build a container image for a Spring Boot application.
 - Run the application and its database together with Compose.

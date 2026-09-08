@@ -1,10 +1,10 @@
 # Authentication, Authorization & Shared State
 
-> Objectives: RAD-K3 · Session 5 · React 18, React Router 6 · See [React Application Development — Study Guide](index.md).
+> Session 5 · React 18, React Router 6 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Share state across a component tree with context, and say when not to.
 - Hold session state and implement login and logout.

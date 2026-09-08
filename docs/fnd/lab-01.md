@@ -1,13 +1,13 @@
 # Lab 01 — Refine the OrderDesk returns backlog
 
-**Duration:** 75 min · **Objectives:** FND-K1
+**Duration:** 75 min
 
 This is guided practice, not an assessed assignment. Work in your team, and expect the
 trainer to interrupt with a stakeholder change part way through.
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Turn a stakeholder's raw request into user stories with a "so that" clause.
 - Write acceptance criteria a reviewer could check, including what must be refused.

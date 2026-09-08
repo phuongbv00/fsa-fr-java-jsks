@@ -1,10 +1,10 @@
 # Lab 04 — Forms, validation and mutations
 
-**Duration:** 150 min · **Objectives:** RAD-K2
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Build controlled inputs with typed form state.
 - Validate on the client and display server field errors.

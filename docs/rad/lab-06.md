@@ -1,10 +1,10 @@
 # Lab 06 — Tests, an error boundary and a production build
 
-**Duration:** 150 min · **Objectives:** RAD-K3
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Write component tests querying by role and label.
 - Mock the network and test all four states.

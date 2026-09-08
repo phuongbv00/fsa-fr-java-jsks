@@ -1,10 +1,10 @@
 # Lab 02 — Effects, fetching and a custom hook
 
-**Duration:** 150 min · **Objectives:** RAD-K1
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Use `useEffect` with a correct dependency array and cleanup.
 - Fetch typed data and render all four states.

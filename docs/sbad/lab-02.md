@@ -1,10 +1,10 @@
 # Lab 02 — REST endpoints with a DTO boundary
 
-**Duration:** 150 min · **Objectives:** SBAD-K1
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Design resource URIs and choose correct methods and status codes.
 - Keep entities out of the API with explicit request and response DTOs.

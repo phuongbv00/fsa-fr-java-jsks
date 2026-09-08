@@ -1,10 +1,10 @@
 # Lab 07 — Authorization, ownership, CORS and a published contract
 
-**Duration:** 150 min · **Objectives:** SBAD-K3
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Restrict endpoints by role and enforce ownership.
 - Configure CORS deliberately and explain its limits.

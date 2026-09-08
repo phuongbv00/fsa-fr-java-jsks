@@ -1,10 +1,10 @@
 # Object-Oriented Design & Modern Java Types
 
-> Objectives: JCF-K1 · Session 3 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 3 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Design a class with private state and a constructor that rejects invalid input.
 - Choose composition over inheritance and say why in a given case.

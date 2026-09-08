@@ -1,10 +1,10 @@
 # Lab 04 — Services, transactions and an invariant
 
-**Duration:** 180 min · **Objectives:** SBAD-K2
+**Duration:** 180 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Move business rules out of controllers into services.
 - Apply `@Transactional` at the right boundary and prove rollback.

@@ -1,6 +1,6 @@
 # Lab 04 — Provoke the failure modes, then work the loop
 
-**Duration:** 60 min · **Objectives:** FND-K3
+**Duration:** 60 min
 
 The first half of this lab deliberately gets the assistant to be wrong, so you learn what
 wrong looks like before it matters. The second half runs the loop properly on one small
@@ -8,7 +8,7 @@ change.
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Provoke and recognise a hallucinated API, an over-scoped answer and a plausible-but-wrong
   implementation.

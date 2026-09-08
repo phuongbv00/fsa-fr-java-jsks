@@ -1,10 +1,10 @@
 # Development Environment & the Java Toolchain
 
-> Objectives: JCF-K1 · Session 1 · JDK 21, Maven 3.9 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 1 · JDK 21, Maven 3.9 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Explain the difference between the JDK, the JRE and the JVM, and say which one runs a jar.
 - Set `JAVA_HOME` correctly and diagnose a mismatch between it and `PATH`.

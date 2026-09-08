@@ -1,10 +1,10 @@
 # Java Syntax, Types & Methods
 
-> Objectives: JCF-K1 · Session 2 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 2 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Distinguish primitive from reference types and predict which one a variable holds.
 - Compare values correctly, choosing between `==` and `equals`.

@@ -1,10 +1,10 @@
 # Lab 03 — Repositories, queries and projections
 
-**Duration:** 150 min · **Objectives:** SBAD-K2
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Declare repositories and write derived and explicit queries.
 - Return pages and projections instead of whole entity lists.

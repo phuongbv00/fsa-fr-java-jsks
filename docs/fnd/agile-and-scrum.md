@@ -1,10 +1,10 @@
 # Agile & Scrum
 
-> Objectives: FND-K1 · Session 1 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
+> Session 1 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - State the Agile values and explain what each one trades away.
 - Name the Scrum roles, events and artifacts, and say what each one is accountable for.
@@ -40,13 +40,14 @@ project — that is the normal case Agile is built for.
 Scrum is one way to work in the manner the values describe. It is deliberately small:
 three accountabilities, five events, three artifacts.
 
-```text
-Product Backlog ──(Sprint Planning)──> Sprint Backlog ──> Daily Scrum (each day)
-                                             │
-                                             ▼
-                                          Increment ──(Sprint Review)──> feedback
-                                             │
-                                             └──(Sprint Retrospective)──> improvement
+```mermaid
+flowchart LR
+    PB["Product Backlog"] -->|Sprint Planning| SB["Sprint Backlog"]
+    SB --> DS["Daily Scrum<br/>every day"]
+    DS --> INC["Increment"]
+    INC -->|Sprint Review| FB["feedback<br/>backlog changes"]
+    INC -->|Sprint Retrospective| IMP["improvement<br/>the team will try"]
+    FB --> PB
 ```
 
 **Accountabilities**

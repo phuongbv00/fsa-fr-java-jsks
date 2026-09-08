@@ -1,10 +1,10 @@
 # Lab 04 — Interchangeable strategies behind one interface
 
-**Duration:** 120 min · **Objectives:** JCF-K1
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Declare an interface expressing a capability in domain terms.
 - Implement it several ways and substitute one for another without changing callers.

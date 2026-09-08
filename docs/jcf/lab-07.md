@@ -1,10 +1,10 @@
 # Lab 07 — A JDBC repository with integration tests
 
-**Duration:** 150 min · **Objectives:** JCF-K3, JCF-K4
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Implement a repository interface against a real database with JDBC.
 - Use `PreparedStatement` and try-with-resources correctly.

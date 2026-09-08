@@ -1,10 +1,10 @@
 # Relational Modelling & Normalization
 
-> Objectives: DBF-K1 · Session 1 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 1 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Identify entities, attributes and relationships in a written domain description.
 - Read and write cardinality, and say what each end of a relationship means in the domain.

@@ -89,11 +89,12 @@ Foundations mattered.
 
 ## 5. The Change Request
 
-In sprint 2 the trainer issues a controlled change request. It is deliberate, and it is marked.
+Part-way through sprint 2 your scope will change. That is deliberate — it is what happens on
+real projects, and handling it is part of what you are here to practise.
 
-You are expected to: assess the impact, renegotiate scope rather than silently absorb it, update
-estimates and the backlog, and record the decision. Working overtime to absorb a change without
-saying anything scores badly — the skill being assessed is the negotiation, not the heroics.
+What to do: assess the impact, renegotiate the scope rather than silently absorbing it, update
+your estimates and backlog, and write down the decision. Quietly working late to absorb a change
+is the wrong answer. The thing worth getting good at is the conversation, not the heroics.
 
 ## 6. Evidence
 
@@ -146,8 +147,8 @@ Agree these on day one and write them down:
 - **Write the acceptance criteria before the code.** They are what the demonstration is judged
   against.
 - **Keep the README true.** Every setup step you discover goes in it the day you discover it.
-- **Review properly.** A rubber-stamped pull request is a mark lost twice: once for the defect,
-  once for the review.
+- **Review properly.** Waving a pull request through costs you twice — the defect ships, and
+  the review that should have caught it is on your name.
 - **Ask early.** A blocker raised on day one costs an hour; on day four it costs the sprint.
 
 ## 10. Glossary

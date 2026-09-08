@@ -1,10 +1,10 @@
 # Lab 08 — A test suite with real security paths
 
-**Duration:** 150 min · **Objectives:** SBAD-K4
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Choose the smallest test that answers the question.
 - Test controllers with slices and repositories against real PostgreSQL.

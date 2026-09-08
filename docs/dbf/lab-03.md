@@ -1,10 +1,10 @@
 # Lab 03 — Query, index and transact
 
-**Duration:** 120 min · **Objectives:** DBF-K2, DBF-K3
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Write queries spanning joins, grouping, aggregation and subqueries, and validate the results.
 - Read a query plan and identify wasted work.

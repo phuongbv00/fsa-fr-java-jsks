@@ -1,10 +1,10 @@
 # Lab 05 — Session state and protected routes
 
-**Duration:** 150 min · **Objectives:** RAD-K3
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Share session state with context.
 - Attach the token centrally and handle expiry.

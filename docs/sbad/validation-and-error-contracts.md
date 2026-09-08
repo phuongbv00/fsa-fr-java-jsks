@@ -1,10 +1,10 @@
 # Validation & Error Contracts
 
-> Objectives: SBAD-K2 · Session 5 · Spring Boot 3.3, Jakarta Validation 3.0 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 5 · Spring Boot 3.3, Jakarta Validation 3.0 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Validate request bodies declaratively with Bean Validation.
 - Validate nested objects and collections.

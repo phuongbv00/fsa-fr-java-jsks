@@ -1,10 +1,10 @@
 # DDL, Constraints & Data Integrity
 
-> Objectives: DBF-K1 · Session 2 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 2 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Choose an appropriate data type for a column and say what the alternatives would permit.
 - Write `CREATE TABLE` statements implementing a model, with keys and constraints.
@@ -169,8 +169,8 @@ and removes an entire class of "the application forgot" bug.
 
 ### Naming constraints
 
-Unnamed constraints get generated names, and generated names appear in the error message your
-learner or your colleague has to interpret.
+Unnamed constraints get generated names, and that generated name is what appears in the error
+message you — or whoever is on call — has to interpret at some point.
 
 ```sql
 -- The error says: violates check constraint "order_line_quantity_check"

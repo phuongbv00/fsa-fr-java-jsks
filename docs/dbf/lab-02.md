@@ -1,10 +1,10 @@
 # Lab 02 — Implement the model as runnable DDL
 
-**Duration:** 150 min · **Objectives:** DBF-K1
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Turn an ERD into `CREATE TABLE` statements with appropriate types.
 - Enforce domain rules with `NOT NULL`, `UNIQUE`, `CHECK` and foreign keys.

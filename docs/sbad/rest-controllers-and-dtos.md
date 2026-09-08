@@ -1,10 +1,10 @@
 # REST Controllers, DTOs & HTTP Semantics
 
-> Objectives: SBAD-K1 · Session 2 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 2 · Spring Boot 3.3 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Design resource URIs and choose the right HTTP method for an operation.
 - Return the correct status code, including for creation and for failure.

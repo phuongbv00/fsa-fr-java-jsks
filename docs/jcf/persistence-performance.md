@@ -1,10 +1,10 @@
 # Persistence Performance
 
-> Objectives: JCF-K4 · Session 9 · JDK 21, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 9 · JDK 21, Hibernate 6.4 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Read a Hibernate SQL log and count the statements a request issues.
 - Recognise the N+1 pattern from a log and name its cause in the mapping.

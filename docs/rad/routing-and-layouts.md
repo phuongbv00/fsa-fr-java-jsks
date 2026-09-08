@@ -1,10 +1,10 @@
 # Routing & Shared Layouts
 
-> Objectives: RAD-K2 · Session 3 · React Router 6 · See [React Application Development — Study Guide](index.md).
+> Session 3 · React Router 6 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Configure routes and render them inside a shared layout.
 - Read route parameters and query strings in a typed way.

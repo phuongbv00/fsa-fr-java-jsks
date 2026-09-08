@@ -25,11 +25,13 @@ resetting.
 arrive from the public website. Staff are not customers — they are employees handling the
 cases the website could not finish on its own.
 
-```text
-website ──> order intake ──> stock reservation ──> pick & pack ──> courier handoff
-                 │                   │                                   │
-                 └── cancellation ───┘                                   └── return / refund
-                     (only inside the cancellation window)
+```mermaid
+flowchart LR
+    W["website"] --> I["order intake"] --> S["stock reservation"]
+    S --> P["pick &amp; pack"] --> C["courier handoff"]
+    I -.-> X["cancellation<br/><i>only inside the window</i>"]
+    S -.-> X
+    C --> R["return / refund"]
 ```
 
 What the domain contains, and why each part earns its place in this module:
@@ -53,10 +55,10 @@ environment misbehaves.
 
 Each unit is a note plus a lab. The pattern is the same every time:
 
-1. The trainer teaches the note.
-2. You do the lab, which is guided and checkable — you can tell yourself when it is done.
-3. You do a short assignment, which is marked.
-4. A quiz closes the unit.
+1. Read the note, or follow it in the session.
+2. Work the lab. It is guided and checkable, so you can tell for yourself when it is done.
+3. Hand in the short assignment.
+4. Take the quiz that closes the unit.
 
 The note is the reference; the lab is where the learning happens. Reading a note and
 skipping its lab leaves you unable to do the next lab, because sessions 2 and 3 build on

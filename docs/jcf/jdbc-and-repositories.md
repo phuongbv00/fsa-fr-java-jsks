@@ -1,10 +1,10 @@
 # JDBC & the Repository Pattern
 
-> Objectives: JCF-K3, JCF-K4 · Session 7 · JDK 21, PostgreSQL 16, driver 42.7 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 7 · JDK 21, PostgreSQL 16, driver 42.7 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Obtain connections from a `DataSource` and release them reliably.
 - Use `PreparedStatement` with bound parameters and explain what it prevents.

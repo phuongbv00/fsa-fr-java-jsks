@@ -1,10 +1,10 @@
 # Semantic HTML & Responsive Layout
 
-> Objectives: FEF-K1 · Session 1 · HTML Living Standard, CSS3 · See [Frontend Foundations — Study Guide](index.md).
+> Session 1 · HTML Living Standard, CSS3 · See [Frontend Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Choose elements for their meaning and structure a page with landmarks.
 - Write a form whose every control is labelled and keyboard-reachable.

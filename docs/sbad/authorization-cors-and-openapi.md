@@ -1,10 +1,10 @@
 # Authorization, CORS & OpenAPI
 
-> Objectives: SBAD-K3 · Session 7 · Spring Boot 3.3, springdoc 2.6 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 7 · Spring Boot 3.3, springdoc 2.6 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Restrict endpoints by role at the route level and at the method level.
 - Enforce an ownership rule, so a user cannot read another user's data.

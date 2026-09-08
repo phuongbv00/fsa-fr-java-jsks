@@ -1,10 +1,10 @@
 # Lab 03 — Routing, layouts and URL state
 
-**Duration:** 120 min · **Objectives:** RAD-K2
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Configure routes inside a shared layout.
 - Read and validate route parameters and query strings.

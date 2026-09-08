@@ -1,10 +1,10 @@
 # Collections, Generics, Lambdas & Streams
 
-> Objectives: JCF-K2 · Session 6 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 6 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Choose between `List`, `Set` and `Map` from the access pattern a task needs.
 - Explain why hash collections require `equals` and `hashCode` and what breaks without them.

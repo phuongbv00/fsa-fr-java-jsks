@@ -1,10 +1,10 @@
 # Lab 09 — Diagnose and fix an N+1
 
-**Duration:** 120 min · **Objectives:** JCF-K4
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Read a Hibernate SQL log and count the statements a call issues.
 - Recognise N+1 from the log and name the line that caused it.

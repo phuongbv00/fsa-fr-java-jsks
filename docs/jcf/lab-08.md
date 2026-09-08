@@ -1,10 +1,10 @@
 # Lab 08 — The same repository with JPA
 
-**Duration:** 150 min · **Objectives:** JCF-K3
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Map entities and relationships onto an existing schema.
 - Identify and set the owning side of a relationship.

@@ -1,10 +1,10 @@
 # React, JSX, Components & State
 
-> Objectives: RAD-K1 · Session 1 · React 18, TypeScript 5.6, Vite 5 · See [React Application Development — Study Guide](index.md).
+> Session 1 · React 18, TypeScript 5.6, Vite 5 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Write a function component with typed props and compose components.
 - Distinguish props from state and decide which a value should be.

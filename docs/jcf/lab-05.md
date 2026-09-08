@@ -1,10 +1,10 @@
 # Lab 05 — Exception boundaries and a test suite
 
-**Duration:** 150 min · **Objectives:** JCF-K2
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Choose checked or unchecked deliberately and place a boundary where it helps.
 - Preserve a cause when translating an exception.

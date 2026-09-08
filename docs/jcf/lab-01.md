@@ -1,10 +1,10 @@
 # Lab 01 — Configure the toolchain and build a project
 
-**Duration:** 90 min · **Objectives:** JCF-K1
+**Duration:** 90 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Verify a consistent JDK across the shell, Maven and the IDE.
 - Create a Maven project that compiles, tests, packages and runs.

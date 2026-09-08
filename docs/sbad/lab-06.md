@@ -1,10 +1,10 @@
 # Lab 06 — Authentication with JWT
 
-**Duration:** 180 min · **Objectives:** SBAD-K3
+**Duration:** 180 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Store users with correctly hashed passwords.
 - Issue and verify a signed JWT.

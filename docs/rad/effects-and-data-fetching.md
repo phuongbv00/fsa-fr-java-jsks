@@ -1,10 +1,10 @@
 # Effects, Data Fetching & Custom Hooks
 
-> Objectives: RAD-K1 · Session 2 · React 18 · See [React Application Development — Study Guide](index.md).
+> Session 2 · React 18 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Use `useEffect` for work that reaches outside React, with a correct dependency array.
 - Clean up an effect and explain what happens without cleanup.

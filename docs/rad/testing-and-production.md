@@ -1,10 +1,10 @@
 # Testing, Error Boundaries & the Production Build
 
-> Objectives: RAD-K3 · Session 6 · Vitest 2, Testing Library 16, Vite 5 · See [React Application Development — Study Guide](index.md).
+> Session 6 · Vitest 2, Testing Library 16, Vite 5 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Write component tests that assert what a user sees, not implementation details.
 - Query by accessible role and label, and say why that matters.

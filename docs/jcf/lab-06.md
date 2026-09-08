@@ -1,10 +1,10 @@
 # Lab 06 — Lookup, grouping, sorting and reporting
 
-**Duration:** 150 min · **Objectives:** JCF-K2
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Choose a collection from the access pattern a task needs.
 - Build lookup, grouping and sorting operations with streams.

@@ -1,10 +1,10 @@
 # Testing Spring Applications
 
-> Objectives: SBAD-K4 · Session 8 · Spring Boot 3.3, JUnit 5, Testcontainers 1.20 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 8 · Spring Boot 3.3, JUnit 5, Testcontainers 1.20 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Choose between a plain unit test, a slice test and a full context test.
 - Test a controller with `@WebMvcTest` and a mocked service.

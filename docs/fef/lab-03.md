@@ -1,10 +1,10 @@
 # Lab 03 — Typed access to the real API
 
-**Duration:** 180 min · **Objectives:** FEF-K3
+**Duration:** 180 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Model an API contract with TypeScript types.
 - Call a real API with `fetch`, handling status codes and timeouts.

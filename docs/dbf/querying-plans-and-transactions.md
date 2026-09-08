@@ -1,10 +1,10 @@
 # SQL Querying, Plans & Transactions
 
-> Objectives: DBF-K2, DBF-K3 · Session 3 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
+> Session 3 · PostgreSQL 16 · See [Database Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Write `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements that affect exactly the intended rows.
 - Choose between inner and outer joins and explain what each includes and excludes.

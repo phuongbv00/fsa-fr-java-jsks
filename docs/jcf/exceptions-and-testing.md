@@ -1,10 +1,10 @@
 # Exceptions & Unit Testing
 
-> Objectives: JCF-K2 · Session 5 · JDK 21, JUnit 5.10 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 5 · JDK 21, JUnit 5.10 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Distinguish checked from unchecked exceptions and choose correctly between them.
 - Place an exception boundary where it can actually do something about the failure.

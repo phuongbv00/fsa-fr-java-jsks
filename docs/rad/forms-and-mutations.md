@@ -1,10 +1,10 @@
 # Forms, Validation & Mutations
 
-> Objectives: RAD-K2 · Session 4 · React 18 · See [React Application Development — Study Guide](index.md).
+> Session 4 · React 18 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Build controlled inputs backed by typed form state.
 - Validate on the client without duplicating the server's authority.

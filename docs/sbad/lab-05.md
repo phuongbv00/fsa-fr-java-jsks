@@ -1,10 +1,10 @@
 # Lab 05 — Validation and one error contract
 
-**Duration:** 120 min · **Objectives:** SBAD-K2
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Validate request bodies, including nested collections.
 - Produce one consistent error body for the whole API.

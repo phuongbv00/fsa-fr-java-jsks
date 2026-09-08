@@ -1,10 +1,10 @@
 # AI-Assisted Development
 
-> Objectives: FND-K3 · Session 4 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
+> Session 4 · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Name the failure modes an AI coding assistant exhibits and recognise each one in output.
 - Explain what the assistant can and cannot see, and supply the context it is missing.
@@ -186,20 +186,16 @@ things count; the assistant's own reassurance is not one of them.
 
 ### The spec → test → generate → review loop
 
-```text
-1. SPEC      Write down what "done" means, in checkable terms.
-             Usually the acceptance criteria you already have.
-
-2. TEST      Decide how you will know it works — a test, or the exact steps
-             you will perform and what you expect to see. Before generating.
-
-3. GENERATE  Prompt with the spec, the constraints and the relevant code.
-
-4. REVIEW    Read every line. Ask of each: do I understand why this is here?
-             Run the check from step 2. Check unfamiliar calls in the docs.
-             ── if it fails, back to step 3 with what you learned ──
-
-5. RECORD    Write down what you accepted, what you rejected, and the evidence.
+```mermaid
+flowchart TB
+    S["<b>1. SPEC</b><br/>Write down what done means,<br/>in checkable terms"]
+    T["<b>2. TEST</b><br/>Decide how you will know it works —<br/>before generating"]
+    G["<b>3. GENERATE</b><br/>Prompt with the spec, the constraints<br/>and the relevant code"]
+    R["<b>4. REVIEW</b><br/>Read every line. Run the check from step 2.<br/>Look up unfamiliar calls"]
+    D["<b>5. RECORD</b><br/>What you accepted, what you rejected,<br/>and the evidence"]
+    S --> T --> G --> R
+    R -->|it fails| G
+    R -->|it passes| D
 ```
 
 Step 2 before step 3 is the part people skip, and it is the part that works. Deciding your

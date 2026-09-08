@@ -1,13 +1,13 @@
 # Lab 03 — Pull requests, review and a rehearsed conflict
 
-**Duration:** 75 min · **Objectives:** FND-K2
+**Duration:** 75 min
 
 You work in pairs for this lab. Both of you author a change and both of you review one, so
 neither of you spends the session only writing or only reading.
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Push a branch and open a pull request a reviewer can act on without asking questions.
 - Review a peer's pull request with comments that name a line and a consequence.

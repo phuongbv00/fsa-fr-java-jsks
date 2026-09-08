@@ -1,10 +1,10 @@
 # Interfaces, Polymorphism & Composition
 
-> Objectives: JCF-K1 · Session 4 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
+> Session 4 · JDK 21 · See [Java Core, JDBC & JPA/Hibernate Persistence — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Declare an interface that expresses a capability in domain terms.
 - Explain polymorphic dispatch and predict which implementation runs.

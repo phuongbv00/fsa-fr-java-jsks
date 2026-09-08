@@ -1,10 +1,10 @@
 # Lab 01 — Bootstrap the API and wire it with configuration
 
-**Duration:** 120 min · **Objectives:** SBAD-K1
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Create a Spring Boot project and start it against a real database.
 - Use constructor injection and typed configuration properties.

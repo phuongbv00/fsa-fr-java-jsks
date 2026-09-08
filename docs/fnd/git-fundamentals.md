@@ -1,10 +1,10 @@
 # Git Fundamentals
 
-> Objectives: FND-K2 · Session 2 · Git 2.40+ · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
+> Session 2 · Git 2.40+ · See [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Name the four states a file can be in and say which command moves it between them.
 - Stage part of a file's changes and explain why that produces a better commit.
@@ -19,15 +19,13 @@ After this unit, learners can:
 Git is not a folder with backups. Every file you touch is in one of four states, and every
 command in this unit moves files between them.
 
-```text
-  working directory          index (staging area)          repository
-        │                            │                          │
-        │──── git add ──────────────>│                          │
-        │                            │──── git commit ─────────>│
-        │<─── git restore ───────────│                          │
-        │<─────────── git restore --staged ──────────┤          │
-                                                                │
-  untracked ──── git add ────> tracked
+```mermaid
+flowchart LR
+    WD["working directory"] -->|git add| IDX["index<br/>staging area"]
+    IDX -->|git commit| REPO["repository"]
+    IDX -->|git restore --staged| WD
+    REPO -->|git restore --source| WD
+    UT["untracked"] -->|git add| TR["tracked"]
 ```
 
 | State | Means | Get out of it with |
@@ -169,25 +167,36 @@ git merge feature/cancellation-window
 **Fast-forward** — `main` has not moved since the branch was created, so Git slides the
 label forward. No merge commit exists, and the history stays a straight line.
 
-```text
-before:   A ── B ── C (main)
-                      \
-                       D ── E (feature)
-
-after:    A ── B ── C ── D ── E (main, feature)
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    branch feature
+    commit id: "D"
+    commit id: "E"
+    checkout main
+    merge feature
 ```
+
+A fast-forward: `main` had not moved, so Git simply advanced the label to `E`.
 
 **Three-way merge** — both branches moved, so Git builds a new commit with two parents.
 
-```text
-before:   A ── B ── C ── F (main)
-                      \
-                       D ── E (feature)
-
-after:    A ── B ── C ── F ─── M (main)
-                      \       /
-                       D ── E
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    branch feature
+    commit id: "D"
+    commit id: "E"
+    checkout main
+    commit id: "F"
+    merge feature id: "M"
 ```
+
+A true merge: both branches moved, so `M` is a new commit with two parents.
 
 When the two sides changed the same lines, Git stops and asks you to resolve a conflict.
 That is unit 3's subject — [Pull Requests & Collaborative Workflow](pull-requests-and-conflicts.md).

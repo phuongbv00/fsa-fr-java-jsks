@@ -1,10 +1,10 @@
 # Spring Boot IoC, Beans, Dependency Injection & Configuration
 
-> Objectives: SBAD-K1 · Session 1 · Spring Boot 3.3, JDK 21 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 1 · Spring Boot 3.3, JDK 21 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Explain the `ApplicationContext` as an IoC container and what it does at startup.
 - Register beans by component scan and by `@Bean` method, and say when each is right.

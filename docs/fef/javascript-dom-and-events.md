@@ -1,10 +1,10 @@
 # Modern JavaScript, the DOM & Events
 
-> Objectives: FEF-K2 · Session 2 · ES2023 · See [Frontend Foundations — Study Guide](index.md).
+> Session 2 · ES2023 · See [Frontend Foundations — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Organise code into ES modules with explicit imports and exports.
 - Transform data with array methods rather than index loops.

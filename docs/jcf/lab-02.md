@@ -1,10 +1,10 @@
 # Lab 02 — A command-line utility from a specification
 
-**Duration:** 120 min · **Objectives:** JCF-K1
+**Duration:** 120 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Implement a written specification exactly, including its error cases.
 - Choose types deliberately, and handle money without floating point.

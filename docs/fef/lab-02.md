@@ -1,10 +1,10 @@
 # Lab 02 — Render from data and handle events
 
-**Duration:** 150 min · **Objectives:** FEF-K2
+**Duration:** 150 min
 
 ## Objectives
 
-After this lab, learners can:
+By the end of this lab you will be able to:
 
 - Organise code into ES modules.
 - Render a list from an array and re-render on change.

@@ -1,10 +1,10 @@
 # Authentication with Spring Security & JWT
 
-> Objectives: SBAD-K3 · Session 6 · Spring Boot 3.3, Spring Security 6.3 · See [Spring Boot API Development — Study Guide](index.md).
+> Session 6 · Spring Boot 3.3, Spring Security 6.3 · See [Spring Boot API Development — Study Guide](index.md).
 
 ## 1. Objectives
 
-After this unit, learners can:
+By the end of this unit you will be able to:
 
 - Describe the security filter chain and where authentication happens.
 - Store users in the database with correctly hashed passwords.
