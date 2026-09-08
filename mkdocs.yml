@@ -1,0 +1,99 @@
+# Base config. The nav is generated — build with mkdocs.gen.yml, which inherits
+# this file and appends the nav:
+#     python -m fsa_docs && mkdocs build -f mkdocs.gen.yml --strict
+
+site_name: FSA Java Web Training
+site_description: Teaching material for the HN_FR_JSKS_JAVA_WEB programme
+docs_dir: docs
+site_dir: site
+use_directory_urls: true
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/school
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle: { icon: material/brightness-auto, name: Follow system }
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle: { icon: material/brightness-7, name: Switch to dark }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle: { icon: material/brightness-4, name: Switch to light }
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # NOTE: `toc` is deliberately left on MkDocs' DEFAULT slugify.
+  # The materials contain authored links like `#agile-scrum` pointing at the
+  # heading `# Agile & Scrum`. The default slugify drops the `&` and collapses
+  # the whitespace, producing exactly `agile-scrum`. The GitHub-style
+  # `pymdownx.slugs.slugify` that Material's docs often suggest would produce
+  # `agile--scrum` and silently break those links. Do not "upgrade" this.
+  - toc:
+      permalink: true
+
+# Turn broken links and anchors into build failures rather than log noise.
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: material/school
+      link: /
+copyright: FPT Software Academy
+
+# --- generated below this line by `python -m fsa_docs` ---
+nav:
+  - Home: index.md
+  - FND:
+    - fnd/index.md
+    - Notes:
+      - "Agile & Scrum": fnd/agile-and-scrum.md
+      - "Git Fundamentals": fnd/git-fundamentals.md
+      - "Pull Requests & Collaborative Workflow": fnd/pull-requests-and-conflicts.md
+      - "AI-Assisted Development": fnd/ai-assisted-development.md
+      - "Agile, Git & AI-Assisted Development Foundations — Appendix": fnd/appendix.md
+    - Labs:
+      - "Lab 01 — Refine the OrderDesk returns backlog": fnd/lab-01.md
+      - "Lab 02 — Build, branch and recover an OrderDesk repository": fnd/lab-02.md
+      - "Lab 03 — Pull requests, review and a rehearsed conflict": fnd/lab-03.md
+      - "Lab 04 — Provoke the failure modes, then work the loop": fnd/lab-04.md
+    - Assignments:
+    - Templates:
