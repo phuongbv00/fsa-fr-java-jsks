@@ -2,8 +2,8 @@
 
 **Duration:** 75 min
 
-This is guided practice, not an assessed assignment. Work in your team, and expect the
-trainer to interrupt with a stakeholder change part way through.
+This is guided practice, not an assessed assignment. Work in your group of four or five, and
+expect the trainer to interrupt with a stakeholder change part way through.
 
 ## Objectives
 

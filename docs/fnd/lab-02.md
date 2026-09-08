@@ -2,8 +2,14 @@
 
 **Duration:** 150 min
 
-The longest lab in the module, and the one that everything in session 3 depends on. Type
-the commands rather than pasting them, and read the output of each before the next.
+The longest lab in the module, and the one that everything in session 3 depends on. Type the
+commands rather than pasting them, and read the output of each before the next.
+
+Sit with your group of four or five, but **each of you builds your own repository**. You cannot
+learn `git add -p` by watching someone else do it, and in session 3 every one of you pushes a
+branch. The group is there so nobody sits stuck: agree that anyone blocked for more than five
+minutes says so out loud. At steps 7, 10 and 13 stop and compare your histories — they will
+differ, and the differences are worth two minutes each.
 
 ## Objectives
 

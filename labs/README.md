@@ -3,11 +3,15 @@
 Starter material for the labs that need something supplied. Most labs scaffold their own
 project — with Vite or a Maven archetype — and are not listed here.
 
+The Foundations labs all run in **groups of four or five**. Lab 03 needs one shared repository
+per group; the rest are done individually but sitting together, so the group can unblock each
+other and compare results.
+
 | Lab | Folder | What it gives you |
 |---|---|---|
 | FND Lab 01 | [`fnd/lab-01-stakeholder-brief`](fnd/lab-01-stakeholder-brief) | One page of raw meeting notes about returns and refunds, deliberately vague and partly contradictory |
 | FND Lab 02 | [`fnd/lab-02-orderdesk-seed`](fnd/lab-02-orderdesk-seed) | A small folder of text and source files with no `.git`, to make a repository from |
-| FND Lab 03 | [`fnd/lab-03-shared-repo`](fnd/lab-03-shared-repo) | The contents a shared repository starts from, plus two stories that collide on purpose |
+| FND Lab 03 | [`fnd/lab-03-shared-repo`](fnd/lab-03-shared-repo) | The contents a shared repository starts from, plus five stories that collide on purpose — one per group member |
 | FND Lab 04 | [`fnd/lab-04-starter-project`](fnd/lab-04-starter-project) | A runnable project with passing tests, for the AI-assisted development lab |
 
 ## Getting them

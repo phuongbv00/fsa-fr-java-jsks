@@ -3,8 +3,12 @@
 **Duration:** 60 min
 
 The first half of this lab deliberately gets the assistant to be wrong, so you learn what
-wrong looks like before it matters. The second half runs the loop properly on one small
-change.
+wrong looks like before it matters. The second half runs the loop properly on one small change.
+
+Work in your group of four or five. Each of you prompts your own assistant and keeps your own
+record — but the first half is far more useful compared than done alone, because the same
+question produces different wrong answers for each of you. Steps 1 to 4 end with the group
+putting its answers side by side.
 
 ## Objectives
 
@@ -56,34 +60,40 @@ By the end of this lab you will be able to:
    unexpectedly. Verify one claim it makes by reading the actual code, and record whether
    the claim held.
 
-5. Now start the real change. The trainer names one **bounded change** to the returns file.
+5. **Stop and compare, as a group.** Put your answers from steps 1 to 4 side by side. Did the
+   assistant invent the same call for everyone, or a different one each time? Whose prompt got
+   closest, and what was different about it? Write down the one prompt habit the group agrees
+   was worth copying — you each use it for the rest of the lab.
+
+6. Now start the real change. The trainer names one **bounded change** to the returns file.
    Write the **spec** first, in your notes: what "done" means, in checkable terms. Do not
    prompt the assistant yet.
 
-6. Write the **check** before generating: either a test you will add, or the exact steps
+7. Write the **check** before generating: either a test you will add, or the exact steps
    you will perform and what you expect to see. Put it in your notes. This is the step that
    makes the rest of the lab work, and the step everyone is tempted to skip.
 
-7. **Generate.** Prompt with the spec, the constraint that only this file changes, and the
+8. **Generate.** Prompt with the spec, the constraint that only this file changes, and the
    relevant code. Do not run the answer yet.
 
-8. **Review before running.** Read every line and mark any you cannot explain. For each
+9. **Review before running.** Read every line and mark any you cannot explain. For each
    unfamiliar call, check the official documentation for the version you are on and record
    what you found. Anything still unexplained after this does not go in.
 
-9. Run your check from step 6. If it fails, go back to step 7 with what you learned — do
+10. Run your check from step 7. If it fails, go back to step 8 with what you learned — do
    not patch the answer by hand until you understand why it failed. Record each round trip.
 
-10. Provoke one more failure on purpose: ask the assistant to justify its answer with a
+11. Provoke one more failure on purpose: ask the assistant to justify its answer with a
     documentation link, then follow the link. Record whether it resolved, and what that
     tells you about citations as evidence.
 
-11. Write up your notes as a record with three parts: what you **accepted** and the
+12. Write up your notes as a record with three parts: what you **accepted** and the
     evidence, what you **rejected** and why, and what you **verified against a primary
-    source**. At least two rejections must be real — steps 1 and 10 supply them.
+    source**. At least two rejections must be real — steps 1 and 11 supply them.
 
-12. Swap with a peer. Read their record and ask them to explain one accepted line without
-    looking at it. If they cannot, that line was not reviewed — say so, kindly.
+13. Swap records with someone else in your group. Read theirs, then ask them to explain one
+    accepted line without looking at it. If they cannot, that line was not reviewed — say so,
+    kindly.
 
 ## Acceptance
 
