@@ -48,13 +48,13 @@ flowchart LR
 
 | # | Module | Title | Track | Days | Contents | Status |
 |---|---|---|---|---:|---|---|
-| 1 | [FND](fnd/index.md) | Agile, Git & AI-Assisted Development Foundations | Common | 5 | 6 notes · 4 labs · 0 assignments | Available |
-| 2 | [DBF](dbf/index.md) | Database Foundations | Common | 5 | 5 notes · 3 labs · 0 assignments | Available |
-| 3 | [JCF](jcf/index.md) | Java Core, JDBC & JPA/Hibernate Persistence | Java | 13 | 11 notes · 9 labs · 0 assignments | Available |
-| 4 | [SBAD](sbad/index.md) | Spring Boot API Development | Java | 13 | 11 notes · 9 labs · 0 assignments | Available |
-| 5 | [FEF](fef/index.md) | Frontend Foundations: HTML, CSS, JavaScript & TypeScript | Front-end | 5 | 5 notes · 3 labs · 0 assignments | Available |
-| 6 | [RAD](rad/index.md) | React Application Development | Front-end | 9 | 8 notes · 6 labs · 0 assignments | Available |
-| 7 | [PRJ](prj/index.md) | Mock Project (Capstone) | Project | 20 | 2 notes · 0 labs · 0 assignments | Available |
+| 1 | [FND](fnd/index.md) | Agile, Git & AI-Assisted Development Foundations | Common | 5 | 4 notes · 4 labs | Available |
+| 2 | [DBF](dbf/index.md) | Database Foundations | Common | 5 | 3 notes · 3 labs | Available |
+| 3 | [JCF](jcf/index.md) | Java Core, JDBC & JPA/Hibernate Persistence | Java | 13 | 9 notes · 9 labs | Available |
+| 4 | [SBAD](sbad/index.md) | Spring Boot API Development | Java | 13 | 9 notes · 9 labs | Available |
+| 5 | [FEF](fef/index.md) | Frontend Foundations: HTML, CSS, JavaScript & TypeScript | Front-end | 5 | 3 notes · 3 labs | Available |
+| 6 | [RAD](rad/index.md) | React Application Development | Front-end | 9 | 6 notes · 6 labs | Available |
+| 7 | [PRJ](prj/index.md) | Mock Project (Capstone) | Project | 20 | study guide | Available |
 
 ## What is here, and what is not
 
