@@ -21,8 +21,10 @@ By the end of this lab you will be able to:
 - You know the OrderDesk domain from section 2 of
   [Agile, Git & AI-Assisted Development Foundations — Study Guide](index.md).
 - You have the **stakeholder brief** — one page of raw notes from a meeting about returns
-  and refunds, deliberately vague and partly contradictory. Get it from
-  [`labs/fnd/lab-01-stakeholder-brief`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-01-stakeholder-brief).
+  and refunds, deliberately vague and partly contradictory — and the **group worksheet** the
+  team fills in as it works. Both are in
+  [`labs/fnd/lab-01-stakeholder-brief`](https://github.com/phuongbv00/fsa-fr-java-jsks/tree/main/labs/fnd/lab-01-stakeholder-brief);
+  take one copy of the worksheet per group.
 - Somewhere to write the backlog that everyone can see: a board, a shared document or a
   wall of sticky notes.
 
@@ -67,6 +69,9 @@ By the end of this lab you will be able to:
 9. The trainer now gives you a **stakeholder change**. Apply it: adjust the affected
    stories and criteria, re-estimate anything whose size changed, and re-order. Note which
    items moved and why — that record is what you discuss in the review.
+
+Every section of the worksheet has a step number on it — if a section is still empty when
+you reach the review, say so out loud rather than filling it in from memory.
 
 ## Acceptance
 
