@@ -16,38 +16,37 @@ By the end of this unit you will be able to:
 
 ## 2. The Four States
 
-Git is not a folder with backups. Every file you touch is in one of four states, and every
-command in this unit moves files between them.
-
-One file's life — created, committed, edited, and walked back out again. The four states are
-on the right of each step:
+Git is not a folder with backups. Every file you touch is in one of four states, and the
+commands in this unit are the moves between the areas that hold them.
 
 ```mermaid
 sequenceDiagram
-    actor You
-    participant WD as Working directory
-    participant IDX as Index (staging area)
-    participant REPO as Repository (.git)
+    participant WS as Workspace
+    participant ST as Staging area
+    participant LR as Local repository
+    participant RR as Remote repository
 
-    You->>WD: create returns.js
-    Note over WD: untracked — Git has never seen this file
-    You->>IDX: git add returns.js
-    Note over IDX: staged — marked for the next commit
-    You->>REPO: git commit
-    Note over REPO: committed — in your repository's history
-    You->>WD: edit returns.js
-    Note over WD: modified — differs from the last commit
-    You->>IDX: git add returns.js
-    Note over IDX: staged
-    You-->>IDX: git restore --staged returns.js
-    Note over IDX: the index goes back to the last commit
-    Note over WD: modified — the edit is still in the working file
-    You-->>WD: git restore returns.js
-    Note over WD: unmodified — the edit is gone for good
+    WS->>ST: git add/mv/rm
+    ST->>LR: git commit
+    WS->>LR: git commit -a
+    LR-->>ST: git restore --staged
+    ST-->>WS: git restore
+    LR-->>WS: git restore --source=HEAD
+    WS<<->>ST: git diff
+    WS<<->>LR: git diff HEAD
+    Note over LR,RR: everything below leaves your machine — unit 3
+    LR->>RR: git push
+    RR-->>LR: git fetch
+    RR-->>WS: git clone/pull
 ```
 
-Read the solid arrows left to right: that is the only path into history. The dashed ones are
-the way back, and they are the two commands people reach for in a panic and get wrong.
+Solid arrows carry a file forward, dashed ones walk it back, and a double-headed arrow only
+compares — `git diff` moves nothing. Read each arrow as *where the content comes from*: this
+is why `git restore --staged` starts at the repository, since it refills the staging area
+from the last commit. The file itself goes from staged back to modified.
+
+The last three commands are the only ones here that talk to another computer. They are unit
+3's subject and are drawn so you can see where your own machine stops.
 
 | State | Means | Get out of it with |
 |---|---|---|
@@ -56,9 +55,9 @@ the way back, and they are the two commands people reach for in a panic and get 
 | Staged | Marked to go into the next commit | `git commit`, or `git restore --staged` to unstage |
 | Committed | In your repository's history | — |
 
-> **Committed is not backed up.** All four states live in the `.git` directory on your own
-> machine. A commit is safe from *you* — you can always get it back — but it is not on any
-> server until you push, and pushing is unit 3's subject.
+> **Committed is not backed up.** Everything above the network note is on your own machine,
+> `.git` included. A commit is safe from *you* — you can always get it back — but it is on no
+> other computer until you push.
 
 The command that tells you which state everything is in:
 
