@@ -53,7 +53,11 @@ the way back, and they are the two commands people reach for in a panic and get 
 | Untracked | Git has never seen this file | `git add` |
 | Modified | Changed since the last commit, not staged | `git add`, or `git restore` to discard |
 | Staged | Marked to go into the next commit | `git commit`, or `git restore --staged` to unstage |
-| Committed | Safely in the repository's history | — |
+| Committed | In your repository's history | — |
+
+> **Committed is not backed up.** All four states live in the `.git` directory on your own
+> machine. A commit is safe from *you* — you can always get it back — but it is not on any
+> server until you push, and pushing is unit 3's subject.
 
 The command that tells you which state everything is in:
 
