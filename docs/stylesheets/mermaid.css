@@ -1,0 +1,84 @@
+/* Mermaid gitGraph colours.
+ *
+ * Mermaid takes branch colours from its own `git0`…`git7` theme variables. Those are
+ * baked in when the diagram renders and do not follow Material's light/dark toggle,
+ * so the defaults — a hard blue and a yellow — glare on white and wash out on slate.
+ * Overriding mermaid's generated classes in CSS instead means the diagram recolours
+ * the instant the palette switches, with no re-render.
+ *
+ * The class names below are mermaid's, from its gitGraph stylesheet:
+ *   .commit<n>       the commit node          .label<n>   the branch-name box
+ *   .branch-label<n> the text in that box     .arrow<n>   the connector
+ * `<n>` is the branch's index, so 0 is `main` and 1 is the first branch created.
+ *
+ * WHY EVERY DECLARATION IS `!important`: mermaid emits its stylesheet inline in the
+ * SVG, scoped to the diagram's generated id — `#mermaid-1 .commit0 { … }`. An id
+ * outranks any number of classes, so a plain `.mermaid .commit0` here loses the
+ * cascade and does nothing at all. The id is generated per render, so it cannot be
+ * matched from a static stylesheet either. `!important` is what is left.
+ *
+ * Blue and orange, not blue and green: the two branches have to stay apart for a
+ * reader with any of the common colour-vision deficiencies. Every pair below is at
+ * or above 4.5:1 against its own background and against its label text.
+ */
+
+:root {
+  --fsa-git-0: #3949ab;  /* indigo 600 */
+  --fsa-git-1: #bf360c;  /* deep orange 900 */
+  --fsa-git-2: #00695c;  /* teal 800 */
+  --fsa-git-3: #6a1b9a;  /* purple 800 */
+  --fsa-git-label-fg: #fff;
+}
+
+[data-md-color-scheme="slate"] {
+  --fsa-git-0: #9fa8da;  /* indigo 200 */
+  --fsa-git-1: #ffb74d;  /* orange 300 */
+  --fsa-git-2: #4db6ac;  /* teal 300 */
+  --fsa-git-3: #ce93d8;  /* purple 200 */
+  --fsa-git-label-fg: #1a1a1f;
+}
+
+.mermaid .commit0 { stroke: var(--fsa-git-0) !important; fill: var(--fsa-git-0) !important; }
+.mermaid .label0 { fill: var(--fsa-git-0) !important; }
+.mermaid .arrow0 { stroke: var(--fsa-git-0) !important; }
+.mermaid .branch-label0 { fill: var(--fsa-git-label-fg) !important; }
+
+.mermaid .commit1 { stroke: var(--fsa-git-1) !important; fill: var(--fsa-git-1) !important; }
+.mermaid .label1 { fill: var(--fsa-git-1) !important; }
+.mermaid .arrow1 { stroke: var(--fsa-git-1) !important; }
+.mermaid .branch-label1 { fill: var(--fsa-git-label-fg) !important; }
+
+.mermaid .commit2 { stroke: var(--fsa-git-2) !important; fill: var(--fsa-git-2) !important; }
+.mermaid .label2 { fill: var(--fsa-git-2) !important; }
+.mermaid .arrow2 { stroke: var(--fsa-git-2) !important; }
+.mermaid .branch-label2 { fill: var(--fsa-git-label-fg) !important; }
+
+.mermaid .commit3 { stroke: var(--fsa-git-3) !important; fill: var(--fsa-git-3) !important; }
+.mermaid .label3 { fill: var(--fsa-git-3) !important; }
+.mermaid .arrow3 { stroke: var(--fsa-git-3) !important; }
+.mermaid .branch-label3 { fill: var(--fsa-git-label-fg) !important; }
+
+/* The commit ids (A, B, C …). Mermaid gives them a half-opaque grey chip that reads
+ * as dirt at this size; the page's own text colour on no chip is cleaner. */
+.mermaid .commit-label { fill: var(--md-default-fg-color) !important; }
+.mermaid .commit-label-bkg { fill: none !important; opacity: 1 !important; }
+
+/* The dashed branch lane. */
+.mermaid .branch { stroke: var(--md-default-fg-color--lighter) !important; }
+
+/* Tags, if a diagram ever uses them. */
+.mermaid .tag-label { fill: var(--md-default-fg-color) !important; }
+.mermaid .tag-label-bkg {
+  fill: var(--md-default-bg-color) !important;
+  stroke: var(--md-default-fg-color--lighter) !important;
+}
+.mermaid .tag-hole { fill: var(--md-default-fg-color) !important; }
+
+/* MUST stay last. A merge node's inner circle carries both `.commit-merge` and its
+ * branch's `.commit<n>`. Both rules here are `!important` and equally specific, so
+ * the one written later wins — it has to be this one, punching the node out to the
+ * page background so a merge reads as a ring rather than a solid dot. */
+.mermaid .commit-merge {
+  stroke: var(--md-default-bg-color) !important;
+  fill: var(--md-default-bg-color) !important;
+}

@@ -79,6 +79,10 @@ validation:
 plugins:
   - search
 
+extra_css:
+  # Recolours mermaid gitGraph diagrams so they follow the light/dark toggle.
+  - stylesheets/mermaid.css
+
 extra:
   social:
     - icon: material/school
