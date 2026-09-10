@@ -195,41 +195,35 @@ straight line.
 Before the merge, `main` is still at `C` and the branch has added two commits of its own:
 
 ```mermaid
-gitGraph
-    commit id: "A"
-    commit id: "B"
-    commit id: "C"
-    branch feature
-    commit id: "D"
-    commit id: "E"
+flowchart LR
+    A --> B --> C --> D --> E
+    main([main]) -.-> C
+    feature([feature]) -.-> E
 ```
 
 After it, nothing has been created. The `main` label has moved to `E`, both labels now name
 the same commit, and the history is one straight line:
 
 ```mermaid
-gitGraph
-    commit id: "A"
-    commit id: "B"
-    commit id: "C"
-    commit id: "D"
-    commit id: "E"
-    branch feature
+flowchart LR
+    A --> B --> C --> D --> E
+    main([main]) -.-> E
+    feature([feature]) -.-> E
 ```
+
+A branch is a label pointing at a commit, so a fast-forward is one label moving. Compare the
+two pictures: the commits are identical and only the `main` arrow has a new target.
 
 **Three-way merge** — both branches moved, so Git builds a new commit with two parents.
 
 ```mermaid
-gitGraph
-    commit id: "A"
-    commit id: "B"
-    commit id: "C"
-    branch feature
-    commit id: "D"
-    commit id: "E"
-    checkout main
-    commit id: "F"
-    merge feature id: "M"
+flowchart LR
+    A --> B --> C
+    C --> D --> E
+    C --> F --> M
+    E --> M
+    main([main]) -.-> M
+    feature([feature]) -.-> E
 ```
 
 A true merge: both branches moved, so `M` is a new commit with two parents.
