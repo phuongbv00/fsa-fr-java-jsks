@@ -184,8 +184,11 @@ git switch main
 git merge feature/cancellation-window
 ```
 
-**Fast-forward** — `main` has not moved since the branch was created, so Git slides the
-label forward. No merge commit exists, and the history stays a straight line.
+**Fast-forward** — `main` has not moved since the branch was created, so there is nothing to
+reconcile. Git slides the label forward. No merge commit exists, and the history stays a
+straight line.
+
+Before the merge, `main` is still at `C` and the branch has added two commits of its own:
 
 ```mermaid
 gitGraph
@@ -195,11 +198,20 @@ gitGraph
     branch feature
     commit id: "D"
     commit id: "E"
-    checkout main
-    merge feature
 ```
 
-A fast-forward: `main` had not moved, so Git simply advanced the label to `E`.
+After it, nothing has been created. The `main` label has moved to `E`, both labels now name
+the same commit, and the history is one straight line:
+
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    commit id: "E"
+    branch feature
+```
 
 **Three-way merge** — both branches moved, so Git builds a new commit with two parents.
 
