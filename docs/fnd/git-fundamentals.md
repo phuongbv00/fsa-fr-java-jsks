@@ -19,14 +19,34 @@ By the end of this unit you will be able to:
 Git is not a folder with backups. Every file you touch is in one of four states, and every
 command in this unit moves files between them.
 
+One file's life — created, committed, edited, and walked back out again. The four states are
+on the right of each step:
+
 ```mermaid
-flowchart LR
-    WD["working directory"] -->|git add| IDX["index<br/>staging area"]
-    IDX -->|git commit| REPO["repository"]
-    IDX -->|git restore --staged| WD
-    REPO -->|git restore --source| WD
-    UT["untracked"] -->|git add| TR["tracked"]
+sequenceDiagram
+    actor You
+    participant WD as Working directory
+    participant IDX as Index (staging area)
+    participant REPO as Repository (.git)
+
+    You->>WD: create returns.js
+    Note over WD: untracked — Git has never seen this file
+    You->>IDX: git add returns.js
+    Note over IDX: staged — marked for the next commit
+    You->>REPO: git commit
+    Note over REPO: committed — safely in history
+    You->>WD: edit returns.js
+    Note over WD: modified — differs from the last commit
+    You->>IDX: git add returns.js
+    Note over IDX: staged
+    REPO-->>IDX: git restore --staged returns.js
+    Note over WD,IDX: modified — unstaged, but the edit is still in the file
+    IDX-->>WD: git restore returns.js
+    Note over WD: unmodified — the edit is gone for good
 ```
+
+Read the solid arrows left to right: that is the only path into history. The dashed ones are
+the way back, and they are the two commands people reach for in a panic and get wrong.
 
 | State | Means | Get out of it with |
 |---|---|---|
