@@ -34,14 +34,15 @@ sequenceDiagram
     You->>IDX: git add returns.js
     Note over IDX: staged — marked for the next commit
     You->>REPO: git commit
-    Note over REPO: committed — safely in history
+    Note over REPO: committed — in your repository's history
     You->>WD: edit returns.js
     Note over WD: modified — differs from the last commit
     You->>IDX: git add returns.js
     Note over IDX: staged
-    REPO-->>IDX: git restore --staged returns.js
-    Note over WD,IDX: modified — unstaged, but the edit is still in the file
-    IDX-->>WD: git restore returns.js
+    You-->>IDX: git restore --staged returns.js
+    Note over IDX: the index goes back to the last commit
+    Note over WD: modified — the edit is still in the working file
+    You-->>WD: git restore returns.js
     Note over WD: unmodified — the edit is gone for good
 ```
 
