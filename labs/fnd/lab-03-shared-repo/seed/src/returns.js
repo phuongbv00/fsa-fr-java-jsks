@@ -15,9 +15,14 @@ function openReturn(order, lines) {
     throw new Error('a return must cover at least one line');
   }
 
+  const eligibleLines = lines.filter((line) => !line.finalClearance);
+  if (eligibleLines.length === 0) {
+    throw new Error('returns on final clearance items are refused');
+  }
+
   return {
     orderId: order.id,
-    lines,
+    lines: eligibleLines,
     raisedAt: new Date().toISOString(),
     approvedBy: null,
     approvedAt: null,
