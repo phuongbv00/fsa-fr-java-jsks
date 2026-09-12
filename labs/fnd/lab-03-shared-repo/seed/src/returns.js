@@ -15,6 +15,14 @@ function openReturn(order, lines) {
     throw new Error('a return must cover at least one line');
   }
 
+  if (order.deliveredAt) {
+    const deliveryTime = new Date(order.deliveredAt).getTime();
+    const daysElapsed = (Date.now() - deliveryTime) / (24 * 60 * 60 * 1000);
+    if (Math.floor(daysElapsed) > 30) {
+      throw new Error('return refused: outside the 30-day return window');
+    }
+  }
+
   return {
     orderId: order.id,
     lines,
