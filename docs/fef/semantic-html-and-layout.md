@@ -182,7 +182,7 @@ One dimension or two. That is the whole decision.
     min-height: 100dvh;
 }
 header { grid-area: header; }
-nav    { grid-area: sidebar; }   /* section 7 renames this "nav" so it exists at every width */
+nav    { grid-area: sidebar; }
 main   { grid-area: main; }
 footer { grid-area: footer; }
 ```
@@ -212,23 +212,21 @@ Write the narrow layout as the base and add complexity as width allows. `min-wid
 build up; `max-width` queries pile up exceptions.
 
 ```css
-/* Base: single column, phone. The nav stays — hidden navigation is unreachable navigation —
-   it just sits under the header as a horizontal row until there is room for a sidebar. */
+/* Base: single column, phone */
 .layout {
     display: grid;
-    grid-template-areas: "header" "nav" "main" "footer";
+    grid-template-areas: "header" "main" "footer";
     grid-template-columns: 1fr;
 }
-nav { grid-area: nav; }
-nav ul { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; }
+nav { display: none; }
 
-/* Tablet and up: the nav becomes a sidebar */
+/* Tablet and up */
 @media (min-width: 48rem) {
     .layout {
-        grid-template-areas: "header header" "nav main" "footer footer";
+        grid-template-areas: "header header" "sidebar main" "footer footer";
         grid-template-columns: 14rem 1fr;
     }
-    nav ul { flex-direction: column; }
+    nav { display: block; }
 }
 
 /* Desktop */
@@ -244,15 +242,6 @@ nav ul { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0
 
 Breakpoints belong where the layout breaks, not at device names. Widen the window until it looks
 wrong; that is the breakpoint.
-
-```css
-/* Wrong — the phone user has no way to reach Products at all */
-nav { display: none; }
-@media (min-width: 48rem) { nav { display: block; } }
-```
-
-If a navigation genuinely must collapse on a phone, it collapses behind a `<button>` that opens
-it — never into nothing.
 
 A wide table on a narrow screen needs a scroll container, not a broken layout:
 

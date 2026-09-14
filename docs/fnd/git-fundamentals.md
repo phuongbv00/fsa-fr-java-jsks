@@ -16,48 +16,24 @@ By the end of this unit you will be able to:
 
 ## 2. The Four States
 
-Git is not a folder with backups. Every file you touch is in one of four states, and the
-commands in this unit are the moves between the areas that hold them.
+Git is not a folder with backups. Every file you touch is in one of four states, and every
+command in this unit moves files between them.
 
 ```mermaid
-sequenceDiagram
-    participant WS as Workspace
-    participant ST as Staging area
-    participant LR as Local repository
-    participant RR as Remote repository
-
-    WS->>ST: git add/mv/rm
-    ST->>LR: git commit
-    WS->>LR: git commit -a
-    LR-->>ST: git restore --staged
-    ST-->>WS: git restore
-    LR-->>WS: git restore --source=HEAD
-    WS<<->>ST: git diff
-    WS<<->>LR: git diff HEAD
-    Note over LR,RR: everything below leaves your machine — unit 3
-    LR->>RR: git push
-    RR-->>LR: git fetch
-    RR-->>WS: git clone/pull
+flowchart LR
+    WD["working directory"] -->|git add| IDX["index<br/>staging area"]
+    IDX -->|git commit| REPO["repository"]
+    IDX -->|git restore --staged| WD
+    REPO -->|git restore --source| WD
+    UT["untracked"] -->|git add| TR["tracked"]
 ```
-
-Solid arrows carry a file forward, dashed ones walk it back, and a double-headed arrow only
-compares — `git diff` moves nothing. Read each arrow as *where the content comes from*: this
-is why `git restore --staged` starts at the repository, since it refills the staging area
-from the last commit. The file itself goes from staged back to modified.
-
-The last three commands are the only ones here that talk to another computer. They are unit
-3's subject and are drawn so you can see where your own machine stops.
 
 | State | Means | Get out of it with |
 |---|---|---|
 | Untracked | Git has never seen this file | `git add` |
 | Modified | Changed since the last commit, not staged | `git add`, or `git restore` to discard |
 | Staged | Marked to go into the next commit | `git commit`, or `git restore --staged` to unstage |
-| Committed | In your repository's history | — |
-
-> **Committed is not backed up.** Everything above the network note is on your own machine,
-> `.git` included. A commit is safe from *you* — you can always get it back — but it is on no
-> other computer until you push.
+| Committed | Safely in the repository's history | — |
 
 The command that tells you which state everything is in:
 
@@ -188,14 +164,10 @@ git switch main
 git merge feature/cancellation-window
 ```
 
-**Fast-forward** — `main` has not moved since the branch was created, so there is nothing to
-reconcile. Git slides the label forward. No merge commit exists, and the history stays a
-straight line.
-
-Before the merge, `main` is still at `C` and the branch has added two commits of its own:
+**Fast-forward** — `main` has not moved since the branch was created, so Git slides the
+label forward. No merge commit exists, and the history stays a straight line.
 
 ```mermaid
-%%{init: {"themeVariables": {"git0":"#6b78c8","git1":"#ef6c00","gitBranchLabel0":"#000000","gitBranchLabel1":"#000000","commitLabelColor":"#1a1a1f","commitLabelBackground":"#ffffff"}}}%%
 gitGraph
     commit id: "A"
     commit id: "B"
@@ -203,26 +175,15 @@ gitGraph
     branch feature
     commit id: "D"
     commit id: "E"
+    checkout main
+    merge feature
 ```
 
-After it, nothing has been created. The `main` label has moved to `E`, both labels now name
-the same commit, and the history is one straight line:
-
-```mermaid
-%%{init: {"themeVariables": {"git0":"#6b78c8","git1":"#ef6c00","gitBranchLabel0":"#000000","gitBranchLabel1":"#000000","commitLabelColor":"#1a1a1f","commitLabelBackground":"#ffffff"}}}%%
-gitGraph
-    commit id: "A"
-    commit id: "B"
-    commit id: "C"
-    commit id: "D"
-    commit id: "E"
-    branch feature
-```
+A fast-forward: `main` had not moved, so Git simply advanced the label to `E`.
 
 **Three-way merge** — both branches moved, so Git builds a new commit with two parents.
 
 ```mermaid
-%%{init: {"themeVariables": {"git0":"#6b78c8","git1":"#ef6c00","gitBranchLabel0":"#000000","gitBranchLabel1":"#000000","commitLabelColor":"#1a1a1f","commitLabelBackground":"#ffffff"}}}%%
 gitGraph
     commit id: "A"
     commit id: "B"
@@ -356,8 +317,8 @@ git reset --hard HEAD~3
 ```
 
 ```bash
-# Right — reverse the same three commits, keeping the record that they happened
-git revert HEAD~3..HEAD
+# Right — reverse the commits, keeping the record that they happened
+git revert HEAD~2..HEAD
 ```
 
 `git reset --hard` has legitimate uses, but it is the command that loses trainees' work in
@@ -398,17 +359,10 @@ The file was already tracked. See section 6 — `git rm --cached` is the fix.
 
 ### The commit contains a file you did not mean to include
 
-You ran `git add .`. If you have not committed yet, unstage it:
+You ran `git add .`. Amend if you have not pushed:
 
 ```bash
 git restore --staged unwanted.log
-```
-
-If it is already in the commit and you have not pushed, take it out of the index and amend —
-`git restore --staged` does nothing here, because the index already matches the commit:
-
-```bash
-git rm --cached unwanted.log
 git commit --amend
 ```
 

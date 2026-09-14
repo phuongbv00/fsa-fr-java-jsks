@@ -1,6 +1,6 @@
 # Routing & Shared Layouts
 
-> Session 3 · React Router 7 · See [React Application Development — Study Guide](index.md).
+> Session 3 · React Router 6 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -15,8 +15,10 @@ By the end of this unit you will be able to:
 ## 2. Routes
 
 ```tsx
-// src/routes.tsx — exported on its own so a test can build a memory router over it (unit 6)
-export const routes = [
+// src/main.tsx
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
     {
         path: '/',
         element: <AppLayout />,
@@ -30,16 +32,9 @@ export const routes = [
         ],
     },
     { path: '/login', element: <LoginPage /> },            // outside the layout: no nav
-];
+]);
 
-// src/main.tsx
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { routes } from './routes';
-
-const router = createBrowserRouter(routes);
-const root = document.getElementById('root');
-if (!root) throw new Error('#root is missing from index.html');
-createRoot(root).render(<RouterProvider router={router} />);
+createRoot(document.getElementById('root')!).render(<RouterProvider router={router} />);
 ```
 
 `path: '*'` last is what turns a mistyped URL into a page rather than a blank screen. Note that
@@ -78,15 +73,14 @@ export function AppLayout() {
 }
 ```
 
-`NavLink` also sets `aria-current="page"` on the active link for you — the attribute from
-Frontend Foundations, maintained by the router. Do not write it yourself:
+For accessibility, mark the current page:
 
 ```tsx
-// Wrong — hard-coded, so every link claims to be the current page
-<NavLink to="/orders" aria-current="page">Orders</NavLink>
-
-// Right — NavLink adds and removes it as the route changes
-<NavLink to="/orders">Orders</NavLink>
+<NavLink to="/orders"
+         className={({ isActive }) => (isActive ? 'active' : undefined)}
+         aria-current="page">
+    Orders
+</NavLink>
 ```
 
 ## 4. Links, Not Anchors
@@ -117,29 +111,18 @@ redirected away from, which redirects again — an inescapable loop.
 ## 5. Parameters
 
 ```tsx
-// The route component validates; the hook is called by a child, so it is never called
-// after an early return — hooks must run on every render, in the same order.
 export function OrderDetailPage() {
     const { orderId } = useParams();        // always string | undefined
 
     // Validate at the boundary: the URL is user input.
     const id = Number(orderId);
-    if (!orderId || !Number.isInteger(id) || id <= 0) {
+    if (!orderId || Number.isNaN(id)) {
         return <p role="alert">That is not a valid order number.</p>;
     }
-    return <OrderDetail orderId={id} />;
-}
 
-function OrderDetail({ orderId }: { orderId: number }) {
-    const { order, loading, error } = useOrder(orderId);    // unit 2's hook
+    const { order, loading, error } = useOrder(id);
     ...
 }
-```
-
-```tsx
-// Wrong — the hook runs on some renders and not others: "Rendered fewer hooks than expected"
-if (!orderId) return <p role="alert">…</p>;
-const { order } = useOrder(Number(orderId));
 ```
 
 ```tsx

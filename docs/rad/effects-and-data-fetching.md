@@ -1,6 +1,6 @@
 # Effects, Data Fetching & Custom Hooks
 
-> Session 2 · React 19 · See [React Application Development — Study Guide](index.md).
+> Session 2 · React 18 · See [React Application Development — Study Guide](index.md).
 
 ## 1. Objectives
 
@@ -78,7 +78,7 @@ useEffect(() => {
 }, [refresh]);
 ```
 
-In React's development Strict Mode every effect runs, cleans up, and runs again — deliberately,
+In React 18's development Strict Mode every effect runs, cleans up, and runs again — deliberately,
 to surface missing cleanup. Two requests in development and one in production is not a bug; a
 missing cleanup is.
 
@@ -102,11 +102,7 @@ export function OrdersPage() {
                 // An aborted request is not an error the user should see.
                 if (e.name !== 'AbortError') setError(messageFor(e));
             })
-            .finally(() => {
-                // The aborted request settles AFTER the next effect has set loading to
-                // true. If it flipped loading back, stale rows would show as "loaded".
-                if (!controller.signal.aborted) setLoading(false);
-            });
+            .finally(() => setLoading(false));
 
         // Cancels the previous request when `status` changes again quickly.
         return () => controller.abort();
@@ -169,7 +165,7 @@ export function useOrders(query: OrderQuery): UseOrdersResult {
         fetchOrders(JSON.parse(key), controller.signal)
             .then(page => setOrders(page.content))
             .catch(e => { if (e.name !== 'AbortError') setError(messageFor(e)); })
-            .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+            .finally(() => setLoading(false));
 
         return () => controller.abort();
     }, [key, reloadToken]);
@@ -223,7 +219,7 @@ export function useOrder(orderId: number) {
         fetchOrder(orderId, controller.signal)
             .then(setOrder)
             .catch(e => { if (e.name !== 'AbortError') setError(messageFor(e)); })
-            .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+            .finally(() => setLoading(false));
 
         return () => controller.abort();
     }, [orderId]);
@@ -270,8 +266,7 @@ Strict Mode double-invoking effects. Expected — but make sure cleanup exists.
 
 ### The screen shows data for the previous selection
 
-A race. Cancel with `AbortController`, clear the old value while loading — and make sure the
-cancelled request's `finally` does not set `loading` back to false.
+A race. Cancel with `AbortController`, and clear the old value while loading.
 
 ### `Rendered fewer hooks than expected`
 
