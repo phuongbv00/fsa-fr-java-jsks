@@ -50,7 +50,16 @@ careful application code fixes that, because the place to put the second value d
 
 ## 3. Entities, Attributes and Relationships
 
-An **entity** is a thing the domain talks about as a unit and needs to identify individually.
+An **entity type** is a kind of thing the domain talks about as a unit and needs to identify
+individually — `CUSTOMER`, `PRODUCT`, `ORDERS`. An **entity instance** is one particular such
+thing: the customer Mai Tran, the product `KB-01`, order 5001.
+
+The box you draw on an ERD is always the *type*. The instances are the data that will fill it
+later, and they are what the diagram quietly makes claims about. Where this note says
+"entity" with no qualifier, it means the type — which is the usual shorthand, and worth
+noticing because the two map to different things: a type becomes a table, an instance becomes
+a row in it.
+
 An **attribute** is a fact about one entity. A **relationship** is a fact that involves two.
 
 The reliable way to find them in prose is grammatical, and it is worth doing literally the

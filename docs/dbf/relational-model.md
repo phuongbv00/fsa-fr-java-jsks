@@ -125,8 +125,10 @@ the mapping gave you.
 
 | In the ER model | Becomes in the relational model |
 |---|---|
-| Entity | A table |
+| Entity type — the box on the diagram | A table |
+| Entity instance — one of those things | A row in that table |
 | Attribute | A typed column |
+| Attribute value | One cell |
 | Identifier | The primary key |
 | One-to-many relationship | A foreign key on the many side |
 | One-to-one relationship | A foreign key with `UNIQUE`, on the side that must exist |
@@ -135,6 +137,10 @@ the mapping gave you.
 | Weak entity | A table whose key includes the owner's foreign key |
 | Mandatory participation | `NOT NULL` on the foreign key |
 | Optional participation | A nullable foreign key |
+
+The first two rows are the pair people run together. `CUSTOMER` the box becomes `customer`
+the table; Mai Tran becomes one row in it. You design the first and the application produces
+the second, which is why the mapping is about types and the schema never mentions Mai at all.
 
 Notice what has no entry. A relationship never becomes a column on *both* sides, and it
 never becomes a list. Those are the two ways this translation goes wrong.

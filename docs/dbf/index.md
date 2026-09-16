@@ -114,6 +114,8 @@ SQL punishes reading and rewards running. A query you have read is a query you d
 
 | Term | Meaning here |
 |---|---|
+| **Entity type** | A kind of thing the domain identifies — the box on an ERD. Becomes a table |
+| **Entity instance** | One particular such thing. Becomes a row |
 | **Relation** | A table. The formal word, used when the distinction from a *result set* matters |
 | **Tuple** | A row |
 | **Candidate key** | Any minimal set of columns that uniquely identifies a row |
