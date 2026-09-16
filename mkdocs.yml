@@ -104,7 +104,9 @@ nav:
   - DBF:
     - dbf/index.md
     - Notes:
-      - "Relational Modelling & Normalization": dbf/relational-modelling.md
+      - "Entity-Relationship Modelling": dbf/er-modelling.md
+      - "The Relational Model": dbf/relational-model.md
+      - "Normalization": dbf/normalization.md
       - "DDL, Constraints & Data Integrity": dbf/ddl-and-constraints.md
       - "SQL Querying, Plans & Transactions": dbf/querying-plans-and-transactions.md
       - "Database Foundations — Appendix": dbf/appendix.md

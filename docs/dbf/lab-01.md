@@ -13,7 +13,8 @@ By the end of this lab you will be able to:
 
 ## Before you start
 
-- You have read [Relational Modelling & Normalization](relational-modelling.md).
+- You have read [Entity-Relationship Modelling](er-modelling.md), [The Relational Model](relational-model.md)
+  and [Normalization](normalization.md).
 - You can render Mermaid — the VS Code Markdown preview, or <https://mermaid.live>.
 - You have a Git repository for this module with a `docs/` folder.
 
@@ -74,7 +75,7 @@ part of the domain the study guide has not modelled for you.
 6. **Justify every relationship.** Under the diagram, one line per relationship, in this form:
 
    ```text
-   PURCHASE_ORDER ||--|{ PURCHASE_ORDER_LINE
+   PURCHASE_ORDER 1 — 1..n PURCHASE_ORDER_LINE
      A purchase order with no lines is not a purchase order, so the child end is one-or-more.
      Enforced by: application, at creation — a foreign key cannot require a child to exist.
    ```

@@ -8,7 +8,7 @@ Where each item of the topic outline is taught.
 
 | # | Syllabus item | Covered in |
 |---|---|---|
-| 1 | Relational Modelling & Normalization | [Relational Modelling & Normalization](relational-modelling.md) |
+| 1 | Relational Modelling & Normalization | [Entity-Relationship Modelling](er-modelling.md), [The Relational Model](relational-model.md), [Normalization](normalization.md) |
 | 2 | DDL, Constraints & Data Integrity | [DDL, Constraints & Data Integrity](ddl-and-constraints.md) |
 | 3 | SQL Querying & Data Manipulation | [SQL Querying, Plans & Transactions](querying-plans-and-transactions.md#2-reading-and-changing-rows) |
 | 4 | Joins, Grouping & Aggregation | [SQL Querying, Plans & Transactions](querying-plans-and-transactions.md#3-joins) |
@@ -19,9 +19,9 @@ Where each item of the topic outline is taught.
 
 | Code | Objective | Taught in | Practised in |
 |---|---|---|---|
-| DBF-K1 | Relational data modelling | Notes 01, 02 | Labs 01, 02 |
-| DBF-K2 | SQL querying and data change | Note 03 | Lab 03 |
-| DBF-K3 | Performance and transaction reasoning | Note 03 | Lab 03 |
+| DBF-K1 | Relational data modelling | Notes 01, 02, 03, 04 | Labs 01, 02 |
+| DBF-K2 | SQL querying and data change | Note 05 | Lab 03 |
+| DBF-K3 | Performance and transaction reasoning | Note 05 | Lab 03 |
 
 ## 3. SQL Quick Reference
 

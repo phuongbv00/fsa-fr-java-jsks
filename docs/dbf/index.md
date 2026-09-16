@@ -9,11 +9,16 @@ tables, it maps them onto the tables you learn to design here.
 
 ## 1. Module Map
 
-| # | Note | Covers | Lab |
+Unit 1 is three notes, because it covers three different models and they have to arrive in
+order — you cannot normalize a diagram, only a set of tables.
+
+| Unit | Note | Covers | Lab |
 |---|---|---|---|
-| 01 | [Relational Modelling & Normalization](relational-modelling.md) | entities, relationships, cardinality, keys, functional dependency, normalization to 3NF | [Lab 01 — Model the OrderDesk returns domain](lab-01.md) |
-| 02 | [DDL, Constraints & Data Integrity](ddl-and-constraints.md) | data types, `PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`, `UNIQUE`, `CHECK`, `DEFAULT`, referential actions | [Lab 02 — Implement the model as runnable DDL](lab-02.md) |
-| 03 | [SQL Querying, Plans & Transactions](querying-plans-and-transactions.md) | CRUD, joins, grouping, aggregation, subqueries, read a query plan, one index, commit and rollback | [Lab 03 — Query, index and transact](lab-03.md) |
+| 1 | [Entity-Relationship Modelling](er-modelling.md) | entities, attributes, relationships, cardinality, identifiers, weak entities, ERD notation | [Lab 01 — Model the OrderDesk returns domain](lab-01.md) |
+| 1 | [The Relational Model](relational-model.md) | relations, candidate and primary keys, foreign keys, mapping an ER model onto tables | [Lab 01 — Model the OrderDesk returns domain](lab-01.md) |
+| 1 | [Normalization](normalization.md) | functional dependency, the three anomalies, normalization to 3NF | [Lab 01 — Model the OrderDesk returns domain](lab-01.md) |
+| 2 | [DDL, Constraints & Data Integrity](ddl-and-constraints.md) | data types, `PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`, `UNIQUE`, `CHECK`, `DEFAULT`, referential actions | [Lab 02 — Implement the model as runnable DDL](lab-02.md) |
+| 3 | [SQL Querying, Plans & Transactions](querying-plans-and-transactions.md) | CRUD, joins, grouping, aggregation, subqueries, read a query plan, one index, commit and rollback | [Lab 03 — Query, index and transact](lab-03.md) |
 
 [Database Foundations — Appendix](appendix.md) maps the syllabus outline onto these notes and lists the
 primary sources.
@@ -55,9 +60,9 @@ enforce. Each one costs a specific design decision:
 Read this page once before session 1, then return to sections 4 and 5 when your environment
 misbehaves or a term stops making sense.
 
-Each unit is a note plus a lab:
+Each unit is its notes plus a lab:
 
-1. Read the note, or follow it in the session.
+1. Read the unit's notes in order, or follow them in the session.
 2. Work the lab. It is guided and checkable, so you can tell when it is done.
 3. Keep chipping at the long assignment — you get it in session 1 and build it all week.
 4. Take the quiz that closes units 1 and 3.
@@ -115,6 +120,8 @@ SQL punishes reading and rewards running. A query you have read is a query you d
 | **Primary key** | The candidate key you chose |
 | **Surrogate key** | A meaningless generated identifier used as the primary key |
 | **Natural key** | A key made of real-world data, like an email address or an ISBN |
+| **Junction table** | The table a many-to-many relationship maps to, keyed by both foreign keys |
+| **Weak entity** | An entity identified only inside its owner, so its key includes the owner's |
 | **Functional dependency** | `A → B`: knowing `A` tells you exactly one `B` |
 | **Normalization** | Removing redundancy so one fact is stored in exactly one place |
 | **Referential integrity** | The guarantee that a foreign key points at a row that exists |
@@ -124,4 +131,4 @@ SQL punishes reading and rewards running. A query you have read is a query you d
 
 ---
 
-Start with [Relational Modelling & Normalization](relational-modelling.md).
+Start with [Entity-Relationship Modelling](er-modelling.md).
