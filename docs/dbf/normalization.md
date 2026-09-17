@@ -13,7 +13,7 @@ order is not arbitrary — you cannot normalize a diagram, only a set of tables.
 
 ## 1. Objectives
 
-By the end of this note you will be able to:
+By the end of this unit you will be able to:
 
 - State the functional dependencies that hold in a table.
 - Name the update, insertion and deletion anomaly a redundant table permits, with a concrete

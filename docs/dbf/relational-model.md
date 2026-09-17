@@ -13,7 +13,7 @@ order is not arbitrary — you cannot normalize a diagram, only a set of tables.
 
 ## 1. Objectives
 
-By the end of this note you will be able to:
+By the end of this unit you will be able to:
 
 - Say what a relation is, and how it differs from an ER diagram and from a result set.
 - Choose a primary key and justify the choice against the alternatives.

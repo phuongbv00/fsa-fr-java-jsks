@@ -9,6 +9,7 @@ By the end of this lab you will be able to:
 - Extract entities, attributes and relationships from a written domain description.
 - Assign and justify cardinality at both ends of every relationship.
 - Choose a primary key per entity and defend it against the alternatives.
+- Map an ER model onto relations, choosing the side each foreign key belongs on.
 - Identify a functional dependency that violates 3NF and correct it.
 
 ## Before you start
@@ -80,7 +81,22 @@ part of the domain the study guide has not modelled for you.
      Enforced by: application, at creation — a foreign key cannot require a child to exist.
    ```
 
-7. **Normalize the supplied table.** This denormalized table is in `docs/anomalies.md`:
+7. **Map the ERD onto relations.** Before any SQL, write `docs/relations.md`: one block per
+   relation, giving its columns, its primary key, and each foreign key with the relation it
+   references.
+
+   ```text
+   supplier_product(supplier_id FK->supplier, product_id FK->product, unit_price, lead_days)
+     PK (supplier_id, product_id)
+     Junction: price and lead time belong to the pair, not to either side.
+   ```
+
+   - Every many-to-many from step 3 appears here as its own relation with a composite key.
+   - Every foreign key sits on the many side, and is `NOT NULL` exactly where the cardinality
+     you wrote in step 2 made participation mandatory.
+   - Name any rule the relations cannot carry, and say where you will enforce it instead.
+
+8. **Normalize the supplied table.** This denormalized table is in `docs/anomalies.md`:
 
    ```text
    po_line_id | po_id | supplier_name | supplier_email    | sku   | product_name | qty | lead_days
@@ -93,7 +109,7 @@ part of the domain the study guide has not modelled for you.
    Write out the functional dependencies, name the highest normal form it satisfies, and give
    the decomposition that reaches 3NF.
 
-8. **Name one anomaly, with rows.** In `docs/anomalies.md`, describe one update, one insertion
+9. **Name one anomaly, with rows.** In `docs/anomalies.md`, describe one update, one insertion
    and one deletion anomaly the table above permits. Each must name specific rows and say what
    goes wrong — not "data could become inconsistent".
 
@@ -104,6 +120,9 @@ part of the domain the study guide has not modelled for you.
 - [ ] The supplier/product junction carries both price and lead time.
 - [ ] Every entity has one line naming its primary key and one line naming a rejected alternative.
 - [ ] Every relationship has a justification sentence in domain terms.
+- [ ] `docs/relations.md` lists every relation with its primary key and every foreign key.
+- [ ] Each foreign key sits on the many side, and is `NOT NULL` exactly where participation
+      is mandatory.
 - [ ] `docs/anomalies.md` lists the functional dependencies of the supplied table.
 - [ ] The 3NF decomposition removes every dependency whose determinant is not a key.
 - [ ] Three anomalies are described, each naming specific rows.
