@@ -18,7 +18,7 @@ rebuild.sh    dropdb, createdb, schema.sql, seed.sql — run it whenever the dat
 ```bash
 cp -r fsa-fr-java-jsks/labs/dbf/orderdesk-schema ~/orderdesk-schema
 cd ~/orderdesk-schema
-./rebuild.sh                  # needs psql, createdb and dropdb on the PATH, PostgreSQL 18
+./rebuild.sh                  # needs psql, createdb and dropdb on the PATH, PostgreSQL 16
 psql orderdesk -c "SELECT order_id, status FROM orders ORDER BY order_id;"
 ```
 
